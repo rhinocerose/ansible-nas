@@ -31,11 +31,9 @@ sonarr_enabled: false         # tv
 sickchill_enabled: false
 couchpotato_enabled: false
 radarr_enabled: false
-get_iplayer_enabled: false
 jackett_enabled: false
 minidlna_enabled: false
 jellyfin_enabled: false
-emby_enabled: false
 bazarr_enabled: false
 ombi_enabled: false
 lidarr_enabled: false
@@ -44,7 +42,6 @@ mylar_enabled: false
 
 # Music
 airsonic_enabled: false
-mymediaforalexa_enabled: false
 
 # News
 miniflux_enabled: false
@@ -66,21 +63,13 @@ krusader_enabled: false
 # Backup & Restore
 duplicati_enabled: false
 nextcloud_enabled: false
-timemachine_enabled: false
 
 # Software build and CI
 gitea_enabled: false
 gitlab_enabled: false
 
-# IRC
-znc_enabled: false
-thelounge_enabled: false
-
 # Password Management
 bitwarden_enabled: false
-
-# Finance
-firefly_enabled: false
 
 # Wallabag
 wallabag_enabled: false
@@ -102,9 +91,6 @@ joomla_enabled: false
 
 # PyTivo
 pytivo_enabled: false
-
-# SEO
-serposcope_enabled: false
 
 # External Access
 # Traefik will allow access to certain applications externally. To enable this you'll either; a domain name that points to your 
@@ -237,14 +223,6 @@ samba_shares:
     browsable: yes
     path: "{{ samba_shares_root }}/dump"
 
-  - name: games
-    comment: 'Games'
-    guest_ok: yes
-    public: yes
-    writable: yes
-    browsable: yes
-    path: "{{ samba_shares_root }}/games"
-
   - name: photos
     comment: 'Pictures'
     guest_ok: yes
@@ -260,14 +238,6 @@ samba_shares:
     writable: yes
     browsable: yes
     path: "{{ samba_shares_root }}/books"
-
-  - name: comics
-    comment: 'Comics'
-    guest_ok: yes
-    public: yes
-    writable: yes
-    browsable: yes
-    path: "{{ samba_shares_root }}/comics"
 
 ###
 ### NFS
@@ -734,15 +704,6 @@ watchtower_command: "--schedule '{{ watchtower_cron_schedule }}' --debug"
 # Slack notifications
 # watchtower_command: "--schedule '{{ watchtower_cron_schedule }}' --notifications 'slack' --notification-slack-hook-url 'https://hooks.slack.com/services/xxx/yyyyyyyyyyyyyyy' --notification-slack-identifier 'ansible-nas'"
 
-###
-### Time Machine
-###
-timemachine_data_directory: "{{ docker_home }}/timemachine"
-timemachine_volume_size_limit: "0"
-timemachine_password: timemachine
-timemachine_share_name: Data
-timemachine_log_level: error
-timemachine_port: "10445"
 
 ###
 ### MiniDLNA
@@ -753,33 +714,12 @@ minidlna_friendly_name: "{{ ansible_nas_hostname }}"
 minidlna_port: "8201"
 
 ###
-### get_iplayer
-###
-get_iplayer_config_directory: "{{ docker_home }}/get_iplayer"
-get_iplayer_download_directory: "{{ tv_root }}/iplayer_downloads"
-get_iplayer_port: "8182"
-
-###
-### mymediaforalexa
-###
-mymediaforalexa_media_directory: "{{ music_root }}"
-mymediaforalexa_data_directory: "{{ docker_home }}/mymediaforalexa"
-
-###
 ### Jackett
 ###
 jackett_available_externally: "false"
 jackett_data_directory: "{{ docker_home }}/jackett"
 jackett_torrents_root: "{{ torrents_root }}"
 jackett_port: "9117"
-
-###
-### The Lounge
-###
-thelounge_available_externally: "false"
-thelounge_data_directory: "{{ docker_home }}/thelounge"
-thelounge_port_one: "113"
-thelounge_port_two: "9002"
 
 ###
 ### Bitwarden
@@ -798,13 +738,6 @@ bitwarden_admin_token: qwertyuiop1234567890poiuytrewq0987654321
 # Once you have created your user, set to "false" and run one more time.
 # Target just Bitwarden by running: ansible-playbook -i inventory nas.yml -b -K -t bitwarden
 bitwarden_allow_signups: false
-
-###
-### Firefly
-###
-firefly_available_externally: "false"
-firefly_data_directory: "{{ docker_home }}/firefly"
-firefly_port: "8066"
 
 ###
 ### Nzbget
@@ -888,13 +821,6 @@ ubooquity_user_id: "0"
 ubooquity_group_id: "0"
 ubooquity_port_webui: "2202"
 ubooquity_port_admin: "2203"
-
-###
-### Serposcope
-###
-serposcope_data_directory: "{{ docker_home }}/serposcope"
-serposcope_port: 7134
-serposcope_available_externally: "false"
 
 ###
 ### Virtual Desktop
