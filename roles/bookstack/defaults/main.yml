@@ -1,0 +1,27 @@
+---
+bookstack_enabled: false
+bookstack_available_externally: false
+
+# directories
+bookstack_config_directory: "{{ docker_home }}/bookstack"
+bookstack_db_config_directory: "{{ docker_home }}/bookstack/mysql"
+
+# docker
+bookstack_container_name: bookstack
+bookstack_container_store: linuxserver
+bookstack_version: "latest"
+
+# network
+bookstack_hostname: "bookstack"
+bookstack_port_http: "6875"
+
+# specs
+bookstack_memory: 1g
+
+# database
+bookstack_db_container: bookstack_db
+bookstack_db_root_password: "{{ mysql_root_password }}"
+bookstack_db_name: bookstackapp
+bookstack_db_user: bookstack
+bookstack_db_host: bookstack_db
+bookstack_root_password: "{{ mysql_root_password }}"

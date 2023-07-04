@@ -1,0 +1,72 @@
+---
+
+- name: Start Bookstack
+  block:
+  - name: Create bookstack_directories
+    file:
+      path: "{{ item }}"
+      state: directory
+      owner: "{{ user_name }}"
+      group: "{{ user_name }}"
+      mode: 0755
+    with_items:
+      - "{{ bookstack_config_directory }}"
+      - "{{ bookstack_db_config_directory }}"
+
+  - name: mariadb Docker Container
+    community.docker.docker_container:
+      name: "{{ bookstack_db_container }}"
+      image: "{{ mariadb_container_store }}/{{ mariadb_container_name }}:{{ mariadb_version }}"
+      pull: true
+      volumes:
+        - "{{ bookstack_db_config_directory }}/config:/config"
+      ports:
+        - "{{ mariadb_port }}:3306/tcp"
+      env:
+        TZ: "{{ system.timezone }}"
+        PUID: "{{ user_uid | string }}"
+        PGID: "{{ user_gid | string }}"
+        MYSQL_USER: "{{ bookstack_db_user }}"
+        MYSQL_PASSWORD: "{{ bookstack_db_root_password: }}"
+        MYSQL_DATABASE: "{{ bookstack_db_name }}"
+        MYSQL_ROOT_PASSWORD: "{{ bookstack_db_root_password: }}"
+      restart_policy: unless-stopped
+
+  - name: bookstack_Docker Container
+    community.docker.docker_container:
+      name: "{{ bookstack_container_name }}"
+      image: "{{ bookstack_container_store }}/{{ bookstack_container_name }}:{{ bookstack_version }}"
+      pull: true
+      links:
+        - "{{ bookstack_db_container }}:db"
+      volumes:
+        - "{{ bookstack_config_directory }}:/config"
+      ports:
+        - "{{ bookstack_port_http }}:80/tcp"
+      env:
+        TZ: "{{ ansible_nas_timezone }}"
+        PUID: "{{ user_uid | string }}"
+        PGID: "{{ user_gid | string }}"
+        DB_HOST: "db:{{ mariadb_port }}"
+        DB_USER: "{{ bookstack_db_user }}"
+        DB_PASS: "{{ bookstack_db_root_password }}"
+        DB_DATABASE: "{{ bookstack_db_name }}"
+      restart_policy: unless-stopped
+      memory: "{{ bookstack_memory }}"
+      labels:
+        traefik.enable: "{{ bookstack_available_externally | string }}"
+        traefik.http.routers.bookstack.rule: "Host(`{{ bookstack_hostname }}.{{ ansible_nas_domain }}`)"
+        traefik.http.routers.bookstack.tls.certresolver: "letsencrypt"
+        traefik.http.routers.bookstack.tls.domains[0].main: "{{ ansible_nas_domain }}"
+        traefik.http.routers.bookstack.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+        traefik.http.services.bookstack.loadbalancer.server.port: "80"
+  when: bookstack_enabled is true
+
+- name: Stop Bookstack
+  block:
+    - name: Stop Bookstack
+      community.docker.docker_container:
+        name: "{{ bookstack_container_name }}"
+        state: absent
+  when: bookstack_enabled is false
+
