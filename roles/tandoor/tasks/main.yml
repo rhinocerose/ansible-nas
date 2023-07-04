@@ -17,7 +17,7 @@
         update_password: on_create
         create_home: no
         group: tandoor
-        
+
     - name: Create tandoor directories
       ansible.builtin.file:
         path: "{{ item }}"
@@ -40,7 +40,7 @@
           PUID: "{{ user_uid | string }}"
           PGID: "{{ user_gid | string }}"
         restart_policy: unless-stopped
-        
+
     - name: Install tandoor Docker Container
       community.docker.docker_container:
         name: "{{ tandoor_container_name }}"
@@ -59,7 +59,7 @@
           PGID: "{{ tandoor_user_id | string }}"
         restart_policy: unless-stopped
         memory: "{{ tandoor_memory }}"
-        
+
     - name: Install tandoor NGINX Docker Container
       community.docker.docker_container:
         name: nginx
