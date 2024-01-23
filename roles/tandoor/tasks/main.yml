@@ -5,10 +5,6 @@
     - name: Create tandoor directories
       ansible.builtin.file:
         path: "{{ item }}"
-        state: directory
-        owner: tandoor
-        group: tandoor
-        mode: 0755
       with_items:
         - "{{ tandoor_config_directory }}"
 
