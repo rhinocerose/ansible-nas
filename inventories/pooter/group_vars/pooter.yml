@@ -200,6 +200,7 @@ lidarr_enabled: true
 prowlarr_enabled: true
 radarr_enabled: true
 sabnzbd_enabled: true
+nzbget_enabled: true
 sickchill_enabled: true
 sonarr_enabled: true
 youtubedlmaterial_enabled: true
