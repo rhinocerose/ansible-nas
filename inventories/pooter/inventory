@@ -8,4 +8,4 @@
 
 
 [all]
-ansible-nas ansible_connection=local ansible_host=localhost
+pooter ansible_connection=local ansible_host=localhost
