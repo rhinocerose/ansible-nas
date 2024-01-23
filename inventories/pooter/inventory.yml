@@ -1,3 +1,4 @@
+---
 [all]
 ## Example when running from a remote workstation
 # pooter ansible_host=192.168.0.188
