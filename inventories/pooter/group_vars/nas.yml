@@ -28,6 +28,154 @@ ansible_nas_domain: example.com
 
 samba_shares_root: /media-files
 
+downloads_root: "{{ samba_shares_root }}/downloads"
+
+# Where your movies are stored
+movies_root: "{{ samba_shares_root }}/movies"
+
+# Where your TV episodes are stored
+tv_root: "{{ samba_shares_root }}/tv"
+
+# Where torrent files are stored (picked up by Transmission for downloading)
+torrents_root: "{{ samba_shares_root }}/torrents"
+
+# Where music is stored
+music_root: "{{ samba_shares_root }}/music"
+
+# Where podcasts are stored
+podcasts_root: "{{ samba_shares_root }}/podcasts"
+
+# Where your books are stored
+books_root: "{{ samba_shares_root }}/books"
+
+# Where your audiobooks are stored
+audiobooks_root: "{{ samba_shares_root }}/audiobooks"
+
+# Where your comics are stored
+comics_root: "{{ samba_shares_root }}/comics"
+
+# Where photos are stored
+photos_root: "{{ samba_shares_root }}/photos"
+
+# Where paperless_ng consumes documents
+documents_root: "{{ samba_shares_root }}/documents"
+
+# Where personal repos and code are stored
+code_root: "{{ samba_shares_root }}/code"
+
+# Where roms are stored
+roms_root: "{{ samba_shares_root }}/roms"
+
+# The description that'll appear next to your Ansible-NAS box when browsing your network
+samba_server_string: Ansible NAS
+
+# Shares you want published over Samba.
+samba_shares:
+  - name: downloads
+    comment: "Stuff downloaded"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ downloads_root }}"
+
+  - name: movies
+    comment: "Movies"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ movies_root }}"
+
+  - name: tv
+    comment: "TV Episodes"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ tv_root }}"
+
+  - name: music
+    comment: "Music"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ music_root }}"
+
+  - name: podcasts
+    comment: "Podcasts"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ podcasts_root }}"
+
+  - name: dump
+    comment: "File dump"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ samba_shares_root }}/dump"
+
+  - name: games
+    comment: "Games"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ samba_shares_root }}/games"
+
+  - name: photos
+    comment: "Pictures"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ photos_root }}"
+
+  - name: books
+    comment: "Books"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ books_root }}"
+
+  - name: audiobooks
+    comment: "Audiobooks"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browsable: yes
+    path: "{{ audiobooks_root }}"
+
+  - name: comics
+    comment: "Comics"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ comics_root }}"
+
+  - name: documents
+    comment: "Documents"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ documents_root }}"
+
+  - name: code
+    comment: "Code"
+    guest_ok: yes
+    public: yes
+    writable: yes
+    browseable: yes
+    path: "{{ code_root }}"
+    
+
 tandoor_enabled: true
 wallabag_enabled: true
 mealie_enabled: true
