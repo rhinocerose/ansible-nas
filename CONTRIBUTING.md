@@ -21,3 +21,6 @@ So you want to add a new application. Great!
 
 * Start by looking at the `hello_world` example. Following this structure is the most likely way of getting your PR approved. Leaving out things the `hello_world` example includes (ie docs, tests) will definitely result in your PR being rejected.
 * Add to the list of Available Applications in `README.md`
+
+
+
