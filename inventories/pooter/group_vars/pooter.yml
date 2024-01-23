@@ -191,7 +191,6 @@ tautulli_enabled: true
 jellyfin_enabled: true
 airsonic_enabled: true
 navidrome_enabled: true
-emby_enabled: true
 
 couchpotato_enabled: true
 get_iplayer_enabled: true

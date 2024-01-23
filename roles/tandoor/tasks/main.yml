@@ -2,22 +2,6 @@
 
 - name: Start Tandoor
   block:
-    - name: Create tandoor group
-      ansible.builtin.group:
-        name: tandoor
-        gid: "{{ tandoor_gid }}"
-        state: present
-
-    - name: Create tandoor user
-      ansible.builtin.user:
-        name: tandoor
-        uid: "{{ tandoor_uid }}"
-        state: present
-        system: yes
-        update_password: on_create
-        create_home: no
-        group: tandoor
-
     - name: Create tandoor directories
       ansible.builtin.file:
         path: "{{ item }}"
@@ -37,8 +21,9 @@
           - "{{ tandoor_config_directory }}/postgresql:/var/lib/postgresql/data"
         env:
           TZ: "{{ system.timezone }}"
-          PUID: "{{ user_uid | string }}"
-          PGID: "{{ user_gid | string }}"
+        env:
+          PUID: "{{ tandoor_user_id }}"
+          PGID: "{{ tandoor_group_id }}"
         restart_policy: unless-stopped
 
     - name: Install tandoor Docker Container

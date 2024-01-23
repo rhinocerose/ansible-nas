@@ -9,8 +9,8 @@ tandoor_version: 1.0.4.1
 tandoor_port_http: 8142
 tandoor_port_https: 8143
 tandoor_hostname: tandoor
-tandoor_uid: "1000"
-tandoor_gid: "1000"
+tandoor_user_id: "0"
+tandoor_group_id: "0"
 tandoor_memory: 1g
 
 
