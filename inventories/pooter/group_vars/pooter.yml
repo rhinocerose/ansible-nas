@@ -193,7 +193,7 @@ airsonic_enabled: true
 navidrome_enabled: true
 emby_enabled: true
 
-couchpotato_enables: true
+couchpotato_enabled: true
 get_iplayer_enabled: true
 jackett_enabled: true
 lidarr_enabled: true
@@ -208,6 +208,7 @@ duplicacy_enabled: true
 nextcloud_enabled: true
 syncthing_enabled: true
 
+
 ddns_updater_enabled: true
 stats_enabled: true
 traefik_enabled: true
@@ -218,4 +219,3 @@ watchtower_enabled: true
 heimdall_enabled: true
 organizr_enabled: true
 
-octoprint_enabled: true
