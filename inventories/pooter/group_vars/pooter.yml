@@ -27,6 +27,8 @@ ansible_nas_email: me@example.com
 # Applications will have subdomain SSL certificates created if Traefik is enabled, e.g. ansible-nas.<your-domain>, nextcloud.<your-domain>
 ansible_nas_domain: example.com
 
+docker_home: /media-files/docker
+
 
 samba_shares_root: /media-files
 
