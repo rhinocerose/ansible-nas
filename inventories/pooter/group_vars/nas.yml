@@ -18,6 +18,8 @@
 
 # Will be added to the docker group to give user command line access to docker
 ansible_nas_user: pooter
+ansible_nas_hostname: pooter
+ansible_nas_timezone: America/New_York
 
 # Your email and domain, used for Let's Encrypt SSL certs
 ansible_nas_email: me@example.com
