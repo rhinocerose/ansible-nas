@@ -180,7 +180,7 @@ samba_shares:
     path: "{{ code_root }}"
     
 
-tandoor_enabled: true
+
 wallabag_enabled: true
 mealie_enabled: true
 deluge_enabled: true
