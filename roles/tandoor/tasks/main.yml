@@ -34,7 +34,6 @@
           - "{{ tandoor_port_http }}:80"
           - "{{ tandoor_port_https }}:443"
         env:
-          TZ: "{{ system.timezone }}"
           PUID: "{{ tandoor_user_id | string }}"
           PGID: "{{ tandoor_user_id | string }}"
         restart_policy: unless-stopped
