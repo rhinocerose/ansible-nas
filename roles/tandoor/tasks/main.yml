@@ -17,8 +17,6 @@
         volumes:
           - "{{ tandoor_config_directory }}/postgresql:/var/lib/postgresql/data"
         env:
-          TZ: "{{ system.timezone }}"
-        env:
           PUID: "{{ tandoor_user_id }}"
           PGID: "{{ tandoor_group_id }}"
         restart_policy: unless-stopped
