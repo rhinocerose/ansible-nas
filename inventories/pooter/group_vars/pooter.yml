@@ -28,8 +28,6 @@ ansible_nas_email: me@example.com
 ansible_nas_domain: example.com
 
 docker_home: /media-files/docker
-
-
 samba_shares_root: /media-files
 
 downloads_root: "{{ samba_shares_root }}/downloads"
@@ -181,41 +179,78 @@ samba_shares:
     
 
 
-wallabag_enabled: true
-mealie_enabled: true
-deluge_enabled: true
-transmission_enabled: true
+## Enable some applications
+heimdall_enabled: true
+portainer_enabled: true
+dashy_enabled: true
+organizr_enabled: true
 
-plex_enabled: true
-tautulli_enabled: true
-jellyfin_enabled: true
+## Audio
 airsonic_enabled: true
 navidrome_enabled: true
 
-couchpotato_enabled: true
-get_iplayer_enabled: true
-jackett_enabled: true
-lidarr_enabled: true
-prowlarr_enabled: true
-radarr_enabled: true
+## Video
+jellyfin_enabled: true
+#jellyfin_available_externally: true
+
+plex_enabled: true
+#plex_available_externally: true
+tautulli_enabled: true
+
+deluge_enabled: true
+#deluge_available_externally: true
+utorrent_enabled: true
+#utorrent_available_externally: true
+
+transmission_enabled: true
+
+# Development of NZBget has stopped
+#nzbget_enabled: true
 sabnzbd_enabled: true
-nzbget_enabled: true
+
+## Overseerr instead of couchpotato
+## couchpotato_enabled: true
+overseerr_enabled: true
 sickchill_enabled: true
+prowlarr_enabled: true
+bazarr_enabled: true
+radarr_enabled: true
 sonarr_enabled: true
+lidarr_enabled: true
+jackett_enabled: true
+
+get_iplayer_enabled: true
 youtubedlmaterial_enabled: true
 
-duplicacy_enabled: true
-nextcloud_enabled: true
-syncthing_enabled: true
+wallabag_enabled: true
+#wallabag_available_externally: true
 
+## Stats
+speedtest_tracker_enabled: true
+#speedtest_tracker_available_externally: true
 
-ddns_updater_enabled: true
 stats_enabled: true
+stats_internet_speed_test_enabled: true
+#stats_grafana_available_externally: true
+#stats_prometheus_available_externally: true
+glances_enabled: true
+
+## Network
 traefik_enabled: true
-grafana_enabled: true
-prometheus_enabled: true
-portainer_enabled: true
+ddns_updater_enabled: true
 watchtower_enabled: true
-heimdall_enabled: true
-organizr_enabled: true
+
+## Food
+mealie_enabled: true
+#mealie_available_externally: true
+
+## Backups
+paperless_ng_enabled: true
+syncthing_enabled: true
+duplicacy_enabled: true
+duplicati_enabled: true
+nextcloud_enabled: true
+
+
+
 
