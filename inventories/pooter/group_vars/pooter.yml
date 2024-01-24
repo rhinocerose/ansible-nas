@@ -238,6 +238,7 @@ glances_enabled: true
 ## Network
 traefik_enabled: true
 ddns_updater_enabled: true
+cloudflare_ddns_enabled: true
 watchtower_enabled: true
 
 ## Food
