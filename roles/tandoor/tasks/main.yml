@@ -31,8 +31,8 @@
           - "{{ tandoor_config_directory }}/nginx_config:/opt/recipes/nginx/conf.d"
           - "{{ tandoor_config_directory }}/mediafiles:/opt/recipes/mediafiles"
         ports:
-          - "{{ tandoor_port_http }}:80"
-          - "{{ tandoor_port_https }}:443"
+          - "{{ tandoor_port_http }}"
+          - "{{ tandoor_port_https }}"
         env:
           PUID: "{{ tandoor_user_id | string }}"
           PGID: "{{ tandoor_user_id | string }}"
