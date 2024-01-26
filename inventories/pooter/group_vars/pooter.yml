@@ -211,6 +211,7 @@ sabnzbd_enabled: true
 ## Overseerr instead of couchpotato
 ## couchpotato_enabled: true
 overseerr_enabled: true
+jellyseerr_enabled: true
 sickchill_enabled: true
 prowlarr_enabled: true
 bazarr_enabled: true
