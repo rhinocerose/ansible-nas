@@ -177,8 +177,6 @@ samba_shares:
     browseable: yes
     path: "{{ code_root }}"
     
-
-
 ## Enable some applications
 heimdall_enabled: true
 portainer_enabled: true
@@ -205,7 +203,7 @@ utorrent_enabled: true
 transmission_enabled: true
 
 # Development of NZBget has stopped
-#nzbget_enabled: true
+# nzbget_enabled: true
 sabnzbd_enabled: true
 
 ## Overseerr instead of couchpotato
@@ -224,16 +222,16 @@ get_iplayer_enabled: true
 youtubedlmaterial_enabled: true
 
 wallabag_enabled: true
-#wallabag_available_externally: true
+# wallabag_available_externally: true
 
 ## Stats
 speedtest_tracker_enabled: true
-#speedtest_tracker_available_externally: true
+# speedtest_tracker_available_externally: true
 
 stats_enabled: true
 stats_internet_speed_test_enabled: true
-#stats_grafana_available_externally: true
-#stats_prometheus_available_externally: true
+# stats_grafana_available_externally: true
+# stats_prometheus_available_externally: true
 glances_enabled: true
 
 ## Network
@@ -244,7 +242,7 @@ watchtower_enabled: true
 
 ## Food
 mealie_enabled: true
-#mealie_available_externally: true
+# mealie_available_externally: true
 
 ## Backups
 paperless_ng_enabled: true
@@ -252,7 +250,3 @@ syncthing_enabled: true
 duplicacy_enabled: true
 duplicati_enabled: true
 nextcloud_enabled: true
-
-
-
-
