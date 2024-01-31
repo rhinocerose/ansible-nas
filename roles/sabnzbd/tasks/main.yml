@@ -16,7 +16,7 @@
         volumes:
           - "{{ sabnzbd_data_directory }}:/config:rw"
           - "{{ sabnzbd_downloads_directory }}:/downloads"
-          - "{{ sabnzbd_incomplete_directory }}:/incomplete-downloads"
+          - "{{ sabnzbd_incomplete_directory }}:/downloads/incomplete"
         ports:
           - "{{ sabnzbd_port }}:8080"
         env:
