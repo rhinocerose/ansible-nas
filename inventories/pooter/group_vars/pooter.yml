@@ -192,8 +192,6 @@ tautulli_enabled: true
 
 deluge_enabled: true
 #deluge_available_externally: true
-utorrent_enabled: true
-#utorrent_available_externally: true
 
 transmission_enabled: true
 
@@ -211,13 +209,13 @@ bazarr_enabled: true
 radarr_enabled: true
 sonarr_enabled: true
 lidarr_enabled: true
-jackett_enabled: true
 
 get_iplayer_enabled: true
 youtubedlmaterial_enabled: true
 
 wallabag_enabled: true
 # wallabag_available_externally: true
+piwigo_enabled: true
 
 ## Stats
 speedtest_tracker_enabled: true
