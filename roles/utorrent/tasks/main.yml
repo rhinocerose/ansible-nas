@@ -28,8 +28,8 @@
           UID: "{{ utorrent_user_id }}"
           GID: "{{ utorrent_group_id }}"
           webui: "ng"
-          dir_active: "/data/.incomplete"
-          dir_completed: "/data"
+          dir_active: "/downloads/incomplete"
+          dir_completed: "/downloads/complete"
         restart_policy: unless-stopped
         memory: "{{ utorrent_memory }}"
         labels:
