@@ -205,7 +205,6 @@ prowlarr_enabled: true
 radarr_enabled: true
 sonarr_enabled: true
 lidarr_enabled: true
-soulseek_enabled: true
 
 get_iplayer_enabled: true
 youtubedlmaterial_enabled: true
