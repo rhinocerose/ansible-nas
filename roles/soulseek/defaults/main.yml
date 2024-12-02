@@ -1,0 +1,20 @@
+---
+soulseek_enabled: false
+soulseek_available_externally: false
+
+# directories
+soulseek_data_directory: "{{ docker_home }}/soulseek/app"
+soulseek_music_directory: "{{ music_root }}"
+soulseek_download_directory: "{{ downloads_root }}"
+
+# network
+soulseek_port: "5030"
+soulseek_hostname: "soulseek"
+
+# docker
+soulseek_container_name: "slskd"
+soulseek_image_name: "slskd/slskd"
+soulseek_image_version: "latest"
+
+# specs
+soulseek_memory: 1g

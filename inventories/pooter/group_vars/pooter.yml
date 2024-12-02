@@ -173,14 +173,15 @@ samba_shares:
     path: "{{ code_root }}"
 
 ## Enable some applications
-heimdall_enabled: true
 portainer_enabled: true
-dashy_enabled: true
 organizr_enabled: true
+homepage_enabled: true
 
 ## Audio
 airsonic_enabled: true
 navidrome_enabled: true
+soulseek_enabled: true
+puddletag_enabled: true
 
 ## Video
 jellyfin_enabled: true
@@ -193,29 +194,25 @@ tautulli_enabled: true
 deluge_enabled: true
 #deluge_available_externally: true
 
-transmission_enabled: true
-
 # Development of NZBget has stopped
 # nzbget_enabled: true
 sabnzbd_enabled: true
 
 ## Overseerr instead of couchpotato
-## couchpotato_enabled: true
 overseerr_enabled: true
 jellyseerr_enabled: true
-sickchill_enabled: true
 prowlarr_enabled: true
-bazarr_enabled: true
 radarr_enabled: true
 sonarr_enabled: true
 lidarr_enabled: true
+soulseek_enabled: true
 
 get_iplayer_enabled: true
 youtubedlmaterial_enabled: true
+pyload_enabled: true
 
 wallabag_enabled: true
 # wallabag_available_externally: true
-piwigo_enabled: true
 
 ## Stats
 speedtest_tracker_enabled: true
@@ -223,6 +220,7 @@ speedtest_tracker_enabled: true
 
 stats_enabled: true
 stats_internet_speed_test_enabled: true
+logging_stack_enabled: true
 # stats_grafana_available_externally: true
 # stats_prometheus_available_externally: true
 glances_enabled: true

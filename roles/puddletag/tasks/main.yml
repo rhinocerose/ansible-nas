@@ -1,0 +1,39 @@
+---
+- name: Start Puddletag
+  block:
+    - name: Create Puddletag Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ puddletag_data_directory }}"
+
+    - name: Puddletag Docker Container
+      community.docker.docker_container:
+        name: "{{ puddletag_container_name }}"
+        image: "{{ puddletag_image_name }}:{{ puddletag_image_version }}"
+        pull: true
+        volumes:
+          - "{{ puddletag_data_directory }}:/config:rw"
+          - "{{ puddletag_music_directory }}:/music:rw"
+          - "{{ puddletag_download_directory }}/untagged:/untagged:rw"
+        ports:
+          - "{{ puddletag_port }}:9443"
+        restart_policy: unless-stopped
+        memory: "{{ puddletag_memory }}"
+        labels:
+          traefik.enable: "{{ puddletag_available_externally | string }}"
+          traefik.http.routers.puddletag.rule: "Host(`{{ puddletag_hostname }}.{{ ansible_nas_domain }}`)"
+          traefik.http.routers.puddletag.tls.certresolver: "letsencrypt"
+          traefik.http.routers.puddletag.tls.domains[0].main: "{{ ansible_nas_domain }}"
+          traefik.http.routers.puddletag.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+          traefik.http.services.puddletag.loadbalancer.server.port: "9443"
+  when: puddletag_enabled is true
+
+- name: Stop Puddletag
+  block:
+    - name: Stop Puddletag
+      community.docker.docker_container:
+        name: "{{ puddletag_container_name }}"
+        state: absent
+  when: puddletag_enabled is false

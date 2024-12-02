@@ -1,0 +1,20 @@
+---
+puddletag_enabled: false
+puddletag_available_externally: false
+
+# directories
+puddletag_data_directory: "{{ docker_home }}/puddletag/config"
+puddletag_music_directory: "{{ music_root }}"
+puddletag_download_directory: "{{ downloads_root }}"
+
+# network
+puddletag_port: "5030"
+puddletag_hostname: "puddletag"
+
+# docker
+puddletag_container_name: "puddletag"
+puddletag_image_name: "xirg/docker-puddletag"
+puddletag_image_version: "latest"
+
+# specs
+puddletag_memory: 1g

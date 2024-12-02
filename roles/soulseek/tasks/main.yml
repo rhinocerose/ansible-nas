@@ -1,0 +1,40 @@
+---
+- name: Start Soulseek
+  block:
+    - name: Create Soulseek Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ soulseek_data_directory }}"
+
+    - name: Soulseek Docker Container
+      community.docker.docker_container:
+        name: "{{ soulseek_container_name }}"
+        image: "{{ soulseek_image_name }}:{{ soulseek_image_version }}"
+        pull: true
+        volumes:
+          - "{{ soulseek_data_directory }}:/data:rw"
+          - "{{ soulseek_music_directory }}:/music:rw"
+          - "{{ soulseek_download_directory }}/slsk-incomplete:/incomplete:rw"
+          - "{{ soulseek_download_directory }}/untagged:/untagged:rw"
+        ports:
+          - "{{ soulseek_port }}:9443"
+        restart_policy: unless-stopped
+        memory: "{{ soulseek_memory }}"
+        labels:
+          traefik.enable: "{{ soulseek_available_externally | string }}"
+          traefik.http.routers.soulseek.rule: "Host(`{{ soulseek_hostname }}.{{ ansible_nas_domain }}`)"
+          traefik.http.routers.soulseek.tls.certresolver: "letsencrypt"
+          traefik.http.routers.soulseek.tls.domains[0].main: "{{ ansible_nas_domain }}"
+          traefik.http.routers.soulseek.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+          traefik.http.services.soulseek.loadbalancer.server.port: "9443"
+  when: soulseek_enabled is true
+
+- name: Stop Soulseek
+  block:
+    - name: Stop Soulseek
+      community.docker.docker_container:
+        name: "{{ soulseek_container_name }}"
+        state: absent
+  when: soulseek_enabled is false

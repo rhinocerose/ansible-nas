@@ -6,6 +6,8 @@
         name: "{{ dashy_container_name }}"
         image: lissy93/dashy:latest
         pull: true
+        volumes:
+          - "{{ dashy_data_directory }}/local-conf.yml:/app/public/conf.yml:rw"
         ports:
           - "{{ dashy_port }}:80"
         restart_policy: unless-stopped
