@@ -1,0 +1,29 @@
+---
+partdb_enabled: false
+partdb_available_externally: false
+
+# directories
+partdb_data_directory: "{{ docker_home }}/partdb"
+
+# network
+partdb_port_http: "10091"
+partdb_port_https: "10454"
+partdb_hostname: "partdb"
+
+# docker
+partdb_container_name: "partdb"
+partdb_image_name: "jbtronics/part-db1"
+partdb_image_version: "latest"
+partdb_user_id: "1000"
+partdb_group_id: "1000"
+
+# specs
+partdb_memory: 1g
+
+# database
+partdb_db_container: partdb_db
+partdb_db_root_password: "{{ mysql_root_password }}"
+partdb_db_name: partdbapp
+partdb_db_user: partdb
+partdb_db_host: partdb_db
+partdb_root_password: "{{ mysql_root_password }}"

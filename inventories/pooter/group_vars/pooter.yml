@@ -240,3 +240,6 @@ syncthing_enabled: true
 duplicacy_enabled: true
 duplicati_enabled: true
 nextcloud_enabled: true
+
+bookstack_enabled: true
+partdb_enabled: true

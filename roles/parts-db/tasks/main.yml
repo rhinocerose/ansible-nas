@@ -1,0 +1,63 @@
+---
+- name: Start partdb
+  block:
+    - name: Create partdb Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ partdb_data_directory }}"
+
+    - name: Mariadb Docker Container
+      community.docker.docker_container:
+        name: "{{ partdb_db_container }}"
+        image: "{{ mariadb_container_store }}/{{ mariadb_container_name }}:{{ mariadb_version }}"
+        pull: true
+        volumes:
+          - "{{ partdb_db_config_directory }}/mysql:/var/lib/mysql"
+        ports:
+          - "{{ mariadb_port }}:3306/tcp"
+        env:
+          TZ: "{{ system.timezone }}"
+          PUID: "{{ user_uid | string }}"
+          PGID: "{{ user_gid | string }}"
+          MYSQL_USER: "{{ partdb_db_user }}"
+          MYSQL_PASSWORD: "{{ partdb_db_root_password }}"
+          MYSQL_DATABASE: "{{ partdb_db_name }}"
+          MYSQL_ROOT_PASSWORD: "{{ partdb_db_root_password }}"
+        restart_policy: unless-stopped
+
+    - name: Create partdb container
+      community.docker.docker_container:
+        name: "{{ partdb_container_name }}"
+        image: "{{ partdb_image_name }}:{{ partdb_image_version }}"
+        pull: true
+        volumes:
+          - "{{ partdb_data_directory }}/uploads:/var/www/html/uploads"
+          - "{{ partdb_data_directory }}/public_media:/var/www/html/public/media"
+          - "{{ partdb_data_directory }}/db:/var/www/html/var/db"
+        env:
+          PUID: "{{ partdb_user_id }}"
+          PGID: "{{ partdb_group_id }}"
+          TZ: "{{ ansible_nas_timezone }}"
+        ports:
+          - "{{ partdb_port_http }}:80"
+          - "{{ partdb_port_https }}:443"
+        restart_policy: unless-stopped
+        memory: "{{ partdb_memory }}"
+        labels:
+          traefik.enable: "{{ partdb_available_externally | string }}"
+          traefik.http.routers.partdb.rule: "Host(`{{ partdb_hostname }}.{{ ansible_nas_domain }}`)"
+          traefik.http.routers.partdb.tls.certresolver: "letsencrypt"
+          traefik.http.routers.partdb.tls.domains[0].main: "{{ ansible_nas_domain }}"
+          traefik.http.routers.partdb.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+          traefik.http.services.partdb.loadbalancer.server.port: "80"
+  when: partdb_enabled is true
+
+- name: Stop partdb
+  block:
+    - name: Stop partdb
+      community.docker.docker_container:
+        name: "{{ partdb_container_name }}"
+        state: absent
+  when: partdb_enabled is false
