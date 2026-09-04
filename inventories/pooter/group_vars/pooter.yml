@@ -177,6 +177,8 @@ portainer_enabled: true
 organizr_enabled: true
 homepage_enabled: true
 
+homeassistant_enabled: true
+
 ## Audio
 airsonic_enabled: true
 navidrome_enabled: true
@@ -194,8 +196,6 @@ tautulli_enabled: true
 deluge_enabled: true
 #deluge_available_externally: true
 
-# Development of NZBget has stopped
-# nzbget_enabled: true
 sabnzbd_enabled: true
 
 ## Overseerr instead of couchpotato
@@ -206,7 +206,7 @@ radarr_enabled: true
 sonarr_enabled: true
 lidarr_enabled: true
 
-get_iplayer_enabled: true
+get_iplayer_enabled: false
 youtubedlmaterial_enabled: true
 pyload_enabled: true
 

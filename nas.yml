@@ -281,6 +281,10 @@
       tags:
         - paperless_ng
 
+    - role: parts-db
+      tags:
+        - parts-db
+        
     - role: piwigo
       tags:
         - piwigo
@@ -296,6 +300,10 @@
     - role: prowlarr
       tags:
         - prowlarr
+
+    - role: puddletag
+      tags:
+        - puddletag
 
     - role: pyload
       tags:
@@ -328,6 +336,10 @@
     - role: sonarr
       tags:
         - sonarr
+
+    - role: soulseek
+      tags:
+        - soulseek
 
     - role: speedtest-tracker
       tags:
