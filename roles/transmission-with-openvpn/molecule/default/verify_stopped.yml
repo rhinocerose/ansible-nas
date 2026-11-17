@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ transmission_openvpn_container_name }}"
         state: absent
-      register: result
+      register: transmission_with_openvpn_result
 
     - name: Check if transmission is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not transmission_with_openvpn_result.changed

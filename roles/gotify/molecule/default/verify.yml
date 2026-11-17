@@ -9,10 +9,10 @@
     - name: Get gotify container state
       community.docker.docker_container:
         name: "{{ gotify_container_name }}"
-      register: result
+      register: gotify_result
 
     - name: Check if gotify containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - gotify_result.container['State']['Status'] == "running"
+          - gotify_result.container['State']['Restarting'] == false

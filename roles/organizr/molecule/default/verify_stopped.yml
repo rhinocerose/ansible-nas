@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ organizr_container_name }}"
         state: absent
-      register: result
+      register: organizr_result
 
     - name: Check if organizr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not organizr_result.changed

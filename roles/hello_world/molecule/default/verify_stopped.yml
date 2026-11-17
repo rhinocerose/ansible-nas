@@ -12,9 +12,9 @@
       community.docker.docker_container:
         name: "{{ hello_world_container_name }}"
         state: absent
-      register: result
+      register: hello_world_result
 
     - name: Check Hello World is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not hello_world_result.changed

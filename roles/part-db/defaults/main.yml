@@ -1,0 +1,32 @@
+---
+partdb_enabled: false
+partdb_available_externally: false
+
+# directories
+partdb_data_directory: "{{ docker_home }}/partdb"
+partdb_uploads_directory: "{{ partdb_data_directory }}/uploads"
+partdb_media_directory: "{{ partdb_data_directory }}/public_media"
+partdb_db_directory: "{{ partdb_data_directory }}/db"
+
+# network
+partdb_hostname: "partdb"
+partdb_port: "10091"
+
+# settings
+# Generate a new secret with: openssl rand -hex 32
+partdb_app_secret: "c01e726a03fc6eb5e1cad6be0dc597a99d390f6a68f4d106e1ec0fcdef098b10"
+partdb_initial_admin_password: "changeme"
+partdb_default_language: "en"
+partdb_default_timezone: "{{ ansible_nas_timezone }}"
+partdb_base_currency: "EUR"
+partdb_instance_name: "Part-DB"
+partdb_trusted_proxies: "127.0.0.0/8,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+partdb_trusted_hosts: "^({{ partdb_hostname }}[.]{{ ansible_nas_domain }}|{{ partdb_hostname }}|{{ ansible_nas_hostname }}|localhost|127[.]0[.]0[.]1|([0-9]{1,3}[.]){3}[0-9]{1,3})$"
+
+# docker
+partdb_container_name: "partdb"
+partdb_image_name: "jbtronics/part-db1"
+partdb_image_version: "latest"
+
+# specs
+partdb_memory: "1g"

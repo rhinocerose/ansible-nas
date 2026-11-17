@@ -1,0 +1,23 @@
+---
+homer_enabled: false
+homer_available_externally: false
+
+# directories
+homer_data_directory: "{{ docker_home }}/homer"
+homer_assets_directory: "{{ homer_data_directory }}/assets"
+
+# network
+homer_hostname: "homer"
+homer_port: "8087"
+
+# uid / gid
+homer_user_id: "1000"
+homer_group_id: "1000"
+
+# docker
+homer_container_name: "homer"
+homer_image_name: "b4bz/homer"
+homer_image_version: "latest"
+
+# specs
+homer_memory: "1g"

@@ -12,9 +12,9 @@
       community.docker.docker_container:
         name: "{{ heimdall_container_name }}"
         state: absent
-      register: result
+      register: heimdall_result
 
     - name: Check Heimdall is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not heimdall_result.changed

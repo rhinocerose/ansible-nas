@@ -9,10 +9,10 @@
     - name: Get gitlab container state
       community.docker.docker_container:
         name: "{{ gitlab_container_name }}"
-      register: result
+      register: gitlab_result
 
     - name: Check if gitlab containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - gitlab_result.container['State']['Status'] == "running"
+          - gitlab_result.container['State']['Restarting'] == false

@@ -9,10 +9,10 @@
     - name: Get timemachine container state
       community.docker.docker_container:
         name: "{{ timemachine_container_name }}"
-      register: result
+      register: timemachine_result
 
     - name: Check if timemachine containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - timemachine_result.container['State']['Status'] == "running"
+          - timemachine_result.container['State']['Restarting'] == false

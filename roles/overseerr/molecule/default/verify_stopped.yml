@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ overseerr_container_name }}"
         state: absent
-      register: result
+      register: overseerr_result
 
     - name: Check if overseerr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not overseerr_result.changed

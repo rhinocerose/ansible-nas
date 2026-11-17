@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ traefik_container_name }}"
         state: absent
-      register: result
+      register: traefik_result
 
     - name: Check if traefik is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not traefik_result.changed

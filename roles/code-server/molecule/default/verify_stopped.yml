@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ code_server_container_name }}"
         state: absent
-      register: result
+      register: code_server_result
 
     - name: Check Code Server is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not code_server_result.changed

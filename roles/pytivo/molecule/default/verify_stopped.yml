@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ pytivo_container_name }}"
         state: absent
-      register: result
+      register: pytivo_result
 
     - name: Check if pytivo is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not pytivo_result.changed

@@ -1,0 +1,30 @@
+---
+forgejo_enabled: false
+forgejo_available_externally: false
+
+# directories
+forgejo_data_directory: "{{ docker_home }}/forgejo"
+
+# network
+forgejo_hostname: "forgejo"
+forgejo_network_name: "forgejo"
+forgejo_port_http: "3002"
+forgejo_port_ssh: "2222"
+forgejo_root_url: "{{ forgejo_available_externally | bool | ternary('https://' + forgejo_hostname + '.' + ansible_nas_domain, 'http://' + forgejo_hostname + ':' + forgejo_port_http) }}"
+
+# database
+forgejo_db_name: "forgejo"
+forgejo_db_user: "forgejo"
+forgejo_db_password: "forgejo"
+
+# docker
+forgejo_container_name: "forgejo"
+forgejo_image_name: "codeberg.org/forgejo/forgejo"
+forgejo_image_version: "17"
+forgejo_db_container_name: "forgejo-db"
+forgejo_db_image_name: "postgres"
+forgejo_db_image_version: "16"
+
+# specs
+forgejo_memory: "1g"
+forgejo_db_memory: "1g"

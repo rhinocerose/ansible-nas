@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ miniflux_container_name }}"
         state: absent
-      register: result
+      register: miniflux_result
 
     - name: Check if miniflux is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not miniflux_result.changed

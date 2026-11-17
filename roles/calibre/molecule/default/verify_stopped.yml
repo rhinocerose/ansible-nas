@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ calibre_container_name }}"
         state: absent
-      register: result
+      register: calibre_result
 
     - name: Check Calibre is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not calibre_result.changed

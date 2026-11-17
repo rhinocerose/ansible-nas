@@ -1,0 +1,25 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Get NetBird server container state
+      community.docker.docker_container:
+        name: "{{ netbird_server_container_name }}"
+      register: netbird_result_server
+
+    - name: Get NetBird dashboard container state
+      community.docker.docker_container:
+        name: "{{ netbird_dashboard_container_name }}"
+      register: netbird_result_dashboard
+
+    - name: Check if NetBird containers are running
+      ansible.builtin.assert:
+        that:
+          - netbird_result_server.container['State']['Status'] == "running"
+          - netbird_result_server.container['State']['Restarting'] == false
+          - netbird_result_dashboard.container['State']['Status'] == "running"
+          - netbird_result_dashboard.container['State']['Restarting'] == false

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ freshrss_container_name }}"
         state: absent
-      register: result
+      register: freshrss_result
 
     - name: Check if freshrss is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not freshrss_result.changed

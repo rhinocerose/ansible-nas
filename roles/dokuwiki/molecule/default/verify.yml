@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ dokuwiki_container_name }}"
-      register: result
+      register: dokuwiki_result
 
     - name: Check Dokuwiki is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - dokuwiki_result.container['State']['Status'] == "running"
+          - dokuwiki_result.container['State']['Restarting'] == false

@@ -1,0 +1,56 @@
+---
+- name: Start Part-DB
+  block:
+    - name: Create Part-DB Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ partdb_uploads_directory }}"
+        - "{{ partdb_media_directory }}"
+        - "{{ partdb_db_directory }}"
+
+    - name: Part-DB Docker Container
+      community.docker.docker_container:
+        name: "{{ partdb_container_name }}"
+        image: "{{ partdb_image_name }}:{{ partdb_image_version }}"
+        pull: true
+        volumes:
+          - "{{ partdb_uploads_directory }}:/var/www/html/uploads:rw"
+          - "{{ partdb_media_directory }}:/var/www/html/public/media:rw"
+          - "{{ partdb_db_directory }}:/var/www/html/var/db:rw"
+        ports:
+          - "{{ partdb_port }}:80"
+        env:
+          DATABASE_URL: "sqlite:///%kernel.project_dir%/var/db/app.db"
+          DATABASE_SQLITE_ENFORCE_FOREIGN_KEYS: "1"
+          DB_AUTOMIGRATE: "true"
+          APP_ENV: "docker"
+          APP_SECRET: "{{ partdb_app_secret }}"
+          INITIAL_ADMIN_PW: "{{ partdb_initial_admin_password }}"
+          DEFAULT_LANG: "{{ partdb_default_language }}"
+          DEFAULT_TIMEZONE: "{{ partdb_default_timezone }}"
+          BASE_CURRENCY: "{{ partdb_base_currency }}"
+          INSTANCE_NAME: "{{ partdb_instance_name }}"
+          ALLOW_ATTACHMENT_DOWNLOADS: "0"
+          USE_GRAVATAR: "0"
+          TRUSTED_PROXIES: "{{ partdb_trusted_proxies }}"
+          TRUSTED_HOSTS: "{{ partdb_trusted_hosts }}"
+        restart_policy: unless-stopped
+        memory: "{{ partdb_memory }}"
+        labels:
+          traefik.enable: "{{ partdb_available_externally | string }}"
+          traefik.http.routers.partdb.rule: "Host(`{{ partdb_hostname }}.{{ ansible_nas_domain }}`)"
+          traefik.http.routers.partdb.tls.certresolver: "letsencrypt"
+          traefik.http.routers.partdb.tls.domains[0].main: "{{ ansible_nas_domain }}"
+          traefik.http.routers.partdb.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+          traefik.http.services.partdb.loadbalancer.server.port: "80"
+  when: partdb_enabled is true
+
+- name: Stop Part-DB
+  block:
+    - name: Stop Part-DB
+      community.docker.docker_container:
+        name: "{{ partdb_container_name }}"
+        state: absent
+  when: partdb_enabled is false

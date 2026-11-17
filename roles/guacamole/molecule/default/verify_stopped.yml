@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ guacamole_container_name }}"
         state: absent
-      register: result
+      register: guacamole_result
 
     - name: Check if guacamole is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not guacamole_result.changed

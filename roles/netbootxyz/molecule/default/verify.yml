@@ -9,10 +9,10 @@
     - name: Get netbootxyz container state
       community.docker.docker_container:
         name: "{{ netbootxyz_container_name }}"
-      register: result
+      register: netbootxyz_result
 
     - name: Check if netbootxyz containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - netbootxyz_result.container['State']['Status'] == "running"
+          - netbootxyz_result.container['State']['Restarting'] == false

@@ -125,6 +125,10 @@
       tags:
         - firefly
 
+    - role: forgejo
+      tags:
+        - forgejo
+
     - role: freshrss
       tags:
         - freshrss
@@ -172,6 +176,14 @@
     - role: homebridge
       tags:
         - homebridge
+
+    - role: homer
+      tags:
+        - homer
+
+    - role: immich
+      tags:
+        - immich
 
     - role: jackett
       tags:
@@ -237,6 +249,10 @@
       tags:
         - navidrome
 
+    - role: netbird
+      tags:
+        - netbird
+
     - role: netbootxyz
       tags:
         - netbootxyz
@@ -281,10 +297,10 @@
       tags:
         - paperless_ng
 
-    - role: parts-db
+    - role: part-db
       tags:
-        - parts-db
-        
+        - part-db
+
     - role: piwigo
       tags:
         - piwigo

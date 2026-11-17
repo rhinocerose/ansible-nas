@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ minecraft_server_container_name }}"
         state: absent
-      register: result
+      register: minecraft_server_result
 
     - name: Check if minecraft_server is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not minecraft_server_result.changed

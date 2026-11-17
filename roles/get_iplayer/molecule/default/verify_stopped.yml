@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ get_iplayer_container_name }}"
         state: absent
-      register: result
+      register: get_iplayer_result
 
     - name: Check if get_iplayer is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not get_iplayer_result.changed

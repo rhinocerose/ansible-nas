@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ cloudcmd_container_name }}"
         state: absent
-      register: result
+      register: cloudcmd_result
 
     - name: Check Cloudcmd is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not cloudcmd_result.changed

@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ couchpotato_container_name }}"
-      register: result
+      register: couchpotato_result
 
     - name: Check Couchpotato is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - couchpotato_result.container['State']['Status'] == "running"
+          - couchpotato_result.container['State']['Restarting'] == false

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ youtubedlmaterial_container_name }}"
         state: absent
-      register: result
+      register: youtubedlmaterial_result
 
     - name: Check if youtubedlmaterial is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not youtubedlmaterial_result.changed

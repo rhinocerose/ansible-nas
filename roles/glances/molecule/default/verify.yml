@@ -9,10 +9,10 @@
     - name: Get glances container state
       community.docker.docker_container:
         name: "{{ glances_container_name }}"
-      register: result
+      register: glances_result
 
     - name: Check if glances containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - glances_result.container['State']['Status'] == "running"
+          - glances_result.container['State']['Restarting'] == false

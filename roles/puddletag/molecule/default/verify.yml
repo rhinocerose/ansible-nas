@@ -9,10 +9,10 @@
     - name: Get soulseek container state
       community.docker.docker_container:
         name: "{{ soulseek_container_name }}"
-      register: result
+      register: puddletag_result
 
     - name: Check if soulseek containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - puddletag_result.container['State']['Status'] == "running"
+          - puddletag_result.container['State']['Restarting'] == false

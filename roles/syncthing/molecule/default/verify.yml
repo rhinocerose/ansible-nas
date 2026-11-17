@@ -9,10 +9,10 @@
     - name: Get syncthing container state
       community.docker.docker_container:
         name: "{{ syncthing_container_name }}"
-      register: result
+      register: syncthing_result
 
     - name: Check if syncthing containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - syncthing_result.container['State']['Status'] == "running"
+          - syncthing_result.container['State']['Restarting'] == false

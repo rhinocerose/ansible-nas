@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ netbootxyz_container_name }}"
         state: absent
-      register: result
+      register: netbootxyz_result
 
     - name: Check if netbootxyz is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not netbootxyz_result.changed

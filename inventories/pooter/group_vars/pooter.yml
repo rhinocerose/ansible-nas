@@ -187,14 +187,14 @@ puddletag_enabled: true
 
 ## Video
 jellyfin_enabled: true
-#jellyfin_available_externally: true
+# jellyfin_available_externally: true
 
 plex_enabled: true
-#plex_available_externally: true
+# plex_available_externally: true
 tautulli_enabled: true
 
 deluge_enabled: true
-#deluge_available_externally: true
+# deluge_available_externally: true
 
 sabnzbd_enabled: true
 

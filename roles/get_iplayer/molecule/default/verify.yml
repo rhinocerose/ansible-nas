@@ -9,10 +9,10 @@
     - name: Get get_iplayer container state
       community.docker.docker_container:
         name: "{{ get_iplayer_container_name }}"
-      register: result
+      register: get_iplayer_result
 
     - name: Check if get_iplayer containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - get_iplayer_result.container['State']['Status'] == "running"
+          - get_iplayer_result.container['State']['Restarting'] == false

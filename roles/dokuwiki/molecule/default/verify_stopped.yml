@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ dokuwiki_container_name }}"
         state: absent
-      register: result
+      register: dokuwiki_result
 
     - name: Check Dokuwiki is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not dokuwiki_result.changed

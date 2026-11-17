@@ -10,16 +10,16 @@
       community.docker.docker_container:
         name: "{{ joomla_container_name }}"
         state: absent
-      register: result
+      register: joomla_result
 
     - name: Try and stop and remove joomla db
       community.docker.docker_container:
         name: "{{ joomla_db_container_name }}"
         state: absent
-      register: result_db
+      register: joomla_result_db
 
     - name: Check if joomla is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
-          - not result_db.changed
+          - not joomla_result.changed
+          - not joomla_result_db.changed

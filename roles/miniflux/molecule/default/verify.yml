@@ -9,10 +9,10 @@
     - name: Get miniflux container state
       community.docker.docker_container:
         name: "{{ miniflux_container_name }}"
-      register: result
+      register: miniflux_result
 
     - name: Check if miniflux containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - miniflux_result.container['State']['Status'] == "running"
+          - miniflux_result.container['State']['Restarting'] == false

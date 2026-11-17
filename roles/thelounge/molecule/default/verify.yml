@@ -9,10 +9,10 @@
     - name: Get thelounge container state
       community.docker.docker_container:
         name: "{{ thelounge_container_name }}"
-      register: result
+      register: thelounge_result
 
     - name: Check if thelounge containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - thelounge_result.container['State']['Status'] == "running"
+          - thelounge_result.container['State']['Restarting'] == false

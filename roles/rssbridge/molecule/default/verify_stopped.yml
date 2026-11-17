@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ rssbridge_container_name }}"
         state: absent
-      register: result
+      register: rssbridge_result
 
     - name: Check if rssbridge is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not rssbridge_result.changed

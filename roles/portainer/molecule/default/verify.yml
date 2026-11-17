@@ -9,10 +9,10 @@
     - name: Get portainer container state
       community.docker.docker_container:
         name: "{{ portainer_container_name }}"
-      register: result
+      register: portainer_result
 
     - name: Check if portainer containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - portainer_result.container['State']['Status'] == "running"
+          - portainer_result.container['State']['Restarting'] == false

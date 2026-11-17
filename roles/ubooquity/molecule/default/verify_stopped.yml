@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ ubooquity_container_name }}"
         state: absent
-      register: result
+      register: ubooquity_result
 
     - name: Check if ubooquity is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not ubooquity_result.changed

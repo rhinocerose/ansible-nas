@@ -10,16 +10,16 @@
       community.docker.docker_container:
         name: "{{ bitwarden_container_name }}"
         state: absent
-      register: result
+      register: bitwarden_result
 
     - name: Try and stop and remove Bitwarden Backup
       community.docker.docker_container:
         name: "{{ bitwarden_backup_container_name }}"
         state: absent
-      register: result_backup
+      register: bitwarden_result_backup
 
     - name: Check Bitwarden is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
-          - not result_backup.changed
+          - not bitwarden_result.changed
+          - not bitwarden_result_backup.changed

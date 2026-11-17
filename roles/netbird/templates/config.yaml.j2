@@ -1,0 +1,29 @@
+# Managed by Ansible-NAS - do not edit by hand
+#
+# Combined NetBird server (Management + Signal + Relay + STUN)
+server:
+  listenAddress: ":80"
+  exposedAddress: "{{ netbird_public_url }}"
+  stunPorts:
+    - {{ netbird_port_stun }}
+  metricsPort: 9090
+  healthcheckAddress: ":9000"
+  logLevel: "info"
+  logFile: "console"
+
+  authSecret: "{{ netbird_relay_auth_secret }}"
+  dataDir: "/var/lib/netbird"
+
+  auth:
+    issuer: "{{ netbird_public_url }}/oauth2"
+    signKeyRefreshEnabled: true
+    sessionCookieEncryptionKey: "{{ netbird_session_cookie_encryption_key }}"
+    dashboardRedirectURIs:
+      - "{{ netbird_dashboard_url }}/nb-auth"
+      - "{{ netbird_dashboard_url }}/nb-silent-auth"
+    cliRedirectURIs:
+      - "http://localhost:53000/"
+
+  store:
+    engine: "sqlite"
+    encryptionKey: "{{ netbird_datastore_encryption_key }}"

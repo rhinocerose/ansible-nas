@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ cloudcmd_container_name }}"
-      register: result
+      register: cloudcmd_result
 
     - name: Check Cloudcmd is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - cloudcmd_result.container['State']['Status'] == "running"
+          - cloudcmd_result.container['State']['Restarting'] == false

@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ bazarr_container_name }}"
-      register: result
+      register: bazarr_result
 
     - name: Check Bazarr is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - bazarr_result.container['State']['Status'] == "running"
+          - bazarr_result.container['State']['Restarting'] == false

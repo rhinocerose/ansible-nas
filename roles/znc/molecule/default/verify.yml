@@ -9,10 +9,10 @@
     - name: Get znc container state
       community.docker.docker_container:
         name: "{{ znc_container_name }}"
-      register: result
+      register: znc_result
 
     - name: Check if znc containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - znc_result.container['State']['Status'] == "running"
+          - znc_result.container['State']['Restarting'] == false

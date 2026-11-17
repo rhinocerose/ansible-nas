@@ -9,10 +9,10 @@
     - name: Get openhab container state
       community.docker.docker_container:
         name: "{{ openhab_container_name }}"
-      register: result
+      register: openhab_result
 
     - name: Check if openhab containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - openhab_result.container['State']['Status'] == "running"
+          - openhab_result.container['State']['Restarting'] == false

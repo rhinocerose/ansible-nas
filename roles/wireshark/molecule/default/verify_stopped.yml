@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ wireshark_container_name }}"
         state: absent
-      register: result
+      register: wireshark_result
 
     - name: Check if wireshark is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not wireshark_result.changed

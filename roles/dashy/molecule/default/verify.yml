@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ dashy_container_name }}"
-      register: result
+      register: dashy_result
 
     - name: Check Dashy is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - dashy_result.container['State']['Status'] == "running"
+          - dashy_result.container['State']['Restarting'] == false

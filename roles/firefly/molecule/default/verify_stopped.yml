@@ -10,16 +10,16 @@
       community.docker.docker_container:
         name: "{{ firefly_container_name }}"
         state: absent
-      register: result
+      register: firefly_result
 
     - name: Try and stop and remove Firefly MySql
       community.docker.docker_container:
         name: "{{ firefly_mysql_container_name }}"
         state: absent
-      register: result_mysql
+      register: firefly_result_mysql
 
     - name: Check Firefly is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
-          - not result_mysql.changed
+          - not firefly_result.changed
+          - not firefly_result_mysql.changed

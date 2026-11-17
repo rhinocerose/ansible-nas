@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ deluge_container_name }}"
         state: absent
-      register: result
+      register: deluge_result
 
     - name: Check Deluge is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not deluge_result.changed

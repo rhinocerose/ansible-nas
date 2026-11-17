@@ -9,7 +9,7 @@
         - "{{ jellyseerr_data_directory }}"
         - "{{ jellyseerr_data_directory }}/config"
 
-    - name: jellyseerr
+    - name: Jellyseerr Docker Container
       community.docker.docker_container:
         name: "{{ jellyseerr_container_name }}"
         image: "{{ jellyseerr_image_name }}:{{ jellyseerr_image_version }}"

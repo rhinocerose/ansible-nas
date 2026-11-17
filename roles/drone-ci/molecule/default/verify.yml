@@ -9,18 +9,18 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ drone_ci_container_name }}"
-      register: result
+      register: drone_ci_result
 
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ drone_ci_runner_container_name }}"
-      register: result_runner
+      register: drone_ci_result_runner
 
 
     - name: Check Drone CI is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
-          - result_runner.container['State']['Status'] == "running"
-          - result_runner.container['State']['Restarting'] == false
+          - drone_ci_result.container['State']['Status'] == "running"
+          - drone_ci_result.container['State']['Restarting'] == false
+          - drone_ci_result_runner.container['State']['Status'] == "running"
+          - drone_ci_result_runner.container['State']['Restarting'] == false

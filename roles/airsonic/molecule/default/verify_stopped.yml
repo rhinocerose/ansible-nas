@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ airsonic_container_name }}"
         state: absent
-      register: result
+      register: airsonic_result
 
     - name: Check Airsonic is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not airsonic_result.changed

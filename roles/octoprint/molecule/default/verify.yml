@@ -9,10 +9,10 @@
     - name: Get octoprint container state
       community.docker.docker_container:
         name: "{{ octoprint_container_name }}"
-      register: result
+      register: octoprint_result
 
     - name: Check if octoprint containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - octoprint_result.container['State']['Status'] == "running"
+          - octoprint_result.container['State']['Restarting'] == false

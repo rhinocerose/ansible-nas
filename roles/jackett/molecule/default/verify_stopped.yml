@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ jackett_container_name }}"
         state: absent
-      register: result
+      register: jackett_result
 
     - name: Check if jackett is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not jackett_result.changed

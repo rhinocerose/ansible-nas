@@ -25,10 +25,13 @@
         src: dashboards/ansible-nas.yml
         dest: "{{ stats_grafana_config_directory }}/provisioning/dashboards/ansible-nas.yml"
 
-    - name: Copy Grafana Ansible-NAS dashboard
+    - name: Copy Grafana dashboards
       ansible.builtin.copy:
-        src: dashboards/ansible-nas-overview.json
-        dest: "{{ stats_grafana_config_directory }}/dashboards/ansible-nas-overview.json"
+        src: "dashboards/{{ item }}"
+        dest: "{{ stats_grafana_config_directory }}/dashboards/{{ item }}"
+      loop:
+        - ansible-nas-overview.json
+        - ansible-nas-health.json
 
     - name: Grafana Docker Container
       community.docker.docker_container:

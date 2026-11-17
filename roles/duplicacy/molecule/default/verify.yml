@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ duplicacy_container_name }}"
-      register: result
+      register: duplicacy_result
 
     - name: Check Duplicacy is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - duplicacy_result.container['State']['Status'] == "running"
+          - duplicacy_result.container['State']['Restarting'] == false

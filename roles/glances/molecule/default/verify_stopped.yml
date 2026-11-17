@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ glances_container_name }}"
         state: absent
-      register: result
+      register: glances_result
 
     - name: Check if glances is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not glances_result.changed

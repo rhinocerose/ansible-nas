@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ prowlarr_container_name }}"
         state: absent
-      register: result
+      register: prowlarr_result
 
     - name: Check if prowlarr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not prowlarr_result.changed

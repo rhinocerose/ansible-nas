@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ lidarr_container_name }}"
         state: absent
-      register: result
+      register: lidarr_result
 
     - name: Check if lidarr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not lidarr_result.changed

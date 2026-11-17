@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ mylar_container_name }}"
         state: absent
-      register: result
+      register: mylar_result
 
     - name: Check if mylar is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not mylar_result.changed

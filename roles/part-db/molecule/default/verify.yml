@@ -1,0 +1,18 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Get Part-DB container state
+      community.docker.docker_container:
+        name: "{{ partdb_container_name }}"
+      register: part_db_result
+
+    - name: Check if Part-DB is running
+      ansible.builtin.assert:
+        that:
+          - part_db_result.container['State']['Status'] == "running"
+          - part_db_result.container['State']['Restarting'] == false

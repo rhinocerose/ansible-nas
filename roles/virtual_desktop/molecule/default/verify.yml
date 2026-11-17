@@ -9,10 +9,10 @@
     - name: Get virtual_desktop container state
       community.docker.docker_container:
         name: "{{ virtual_desktop_container_name }}"
-      register: result
+      register: virtual_desktop_result
 
     - name: Check if virtual_desktop containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - virtual_desktop_result.container['State']['Status'] == "running"
+          - virtual_desktop_result.container['State']['Restarting'] == false

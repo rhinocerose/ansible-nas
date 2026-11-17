@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ plex_container_name }}"
         state: absent
-      register: result
+      register: plex_result
 
     - name: Check if plex is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not plex_result.changed

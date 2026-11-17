@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ booksonic_container_name }}"
         state: absent
-      register: result
+      register: booksonic_result
 
     - name: Check Booksonic is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not booksonic_result.changed
