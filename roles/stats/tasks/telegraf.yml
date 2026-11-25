@@ -18,6 +18,7 @@
       ansible.builtin.command: stat -c '%g' /var/run/docker.sock
       register: stats_docker_uid
       changed_when: false
+      check_mode: false # read-only; its output is needed by the next task in check mode too
 
     - name: Telegraf Docker Container
       community.docker.docker_container:
