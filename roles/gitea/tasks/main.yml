@@ -25,10 +25,10 @@
         volumes:
           - "{{ gitea_data_directory }}/mysql:/var/lib/mysql:rw"
         env:
-          MYSQL_DATABASE: "gitea"
-          MYSQL_USER: "gitea"
-          MYSQL_PASSWORD: "gitea"
-          MYSQL_ROOT_PASSWORD: "gitea"
+          MYSQL_DATABASE: "{{ gitea_db_name }}"
+          MYSQL_USER: "{{ gitea_db_user }}"
+          MYSQL_PASSWORD: "{{ gitea_db_password }}"
+          MYSQL_ROOT_PASSWORD: "{{ gitea_db_root_password }}"
         restart_policy: unless-stopped
         memory: "{{ gitea_mysql_memory }}"
 
@@ -48,15 +48,15 @@
         env:
           DB_TYPE: "mysql"
           DB_HOST: "{{ gitea_mysql_container_name }}:3306"
-          DB_NAME: "gitea"
-          DB_USER: "gitea"
-          DB_PASSWD: "gitea"
+          DB_NAME: "{{ gitea_db_name }}"
+          DB_USER: "{{ gitea_db_user }}"
+          DB_PASSWD: "{{ gitea_db_password }}"
           RUN_MODE: "prod"
           SSH_DOMAIN: "{{ ansible_nas_hostname }}"
           SSH_PORT: "{{ gitea_port_ssh }}"
           ROOT_URL: "http://{{ gitea_hostname }}:{{ gitea_port_http }}/"
-          USER_UID: "1000"
-          USER_GID: "1000"
+          USER_UID: "{{ gitea_user_id }}"
+          USER_GID: "{{ gitea_group_id }}"
         restart_policy: unless-stopped
         memory: "{{ gitea_memory }}"
         labels:

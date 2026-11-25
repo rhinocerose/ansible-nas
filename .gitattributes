@@ -1,1 +1,5 @@
 * text=auto
+
+# Show decrypted diffs for vault files. Opt in per clone with:
+#   git config diff.ansible-vault.textconv "ansible-vault view"
+inventories/*/group_vars/*/vault.yml diff=ansible-vault

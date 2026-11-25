@@ -4,11 +4,13 @@ partdb_available_externally: false
 
 # directories
 partdb_data_directory: "{{ docker_home }}/partdb"
+partdb_db_data_directory: "{{ partdb_data_directory }}/mysql"
 
 # network
 partdb_port_http: "10091"
 partdb_port_https: "10454"
 partdb_hostname: "partdb"
+partdb_network_name: "partdb"
 
 # docker
 partdb_container_name: "partdb"
@@ -22,8 +24,11 @@ partdb_memory: 1g
 
 # database
 partdb_db_container: partdb_db
-partdb_db_root_password: "{{ mysql_root_password }}"
-partdb_db_name: partdbapp
+partdb_db_image_name: "mariadb"
+partdb_db_image_version: "10.11"
+partdb_db_name: partdb
 partdb_db_user: partdb
-partdb_db_host: partdb_db
-partdb_root_password: "{{ mysql_root_password }}"
+# change these!
+partdb_db_password: "partdb-pass"
+partdb_db_root_password: "partdb-root-pass"
+partdb_db_memory: 512m

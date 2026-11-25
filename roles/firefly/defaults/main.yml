@@ -9,6 +9,7 @@ firefly_data_directory: "{{ docker_home }}/firefly"
 # network
 firefly_hostname: "firefly"
 firefly_port: "8066"
+firefly_network_name: "firefly"
 
 # specs
 firefly_memory: "1g"
@@ -17,3 +18,16 @@ firefly_mysql_memory: "1g"
 # docker
 firefly_container_name: firefly
 firefly_mysql_container_name: firefly-mysql
+
+# database
+firefly_db_name: firefly
+firefly_db_user: firefly
+# Override these, ideally from Ansible Vault. The database only reads them when it's first
+# created, so on an existing install set them to the current values (the old defaults below).
+firefly_db_password: "firefly"
+firefly_db_root_password: "firefly"
+
+# Encryption key for Firefly III data - must be exactly 32 characters.
+# Generate one with: head /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9' | head -c 32
+# WARNING: changing this on an existing install makes previously encrypted data unreadable.
+firefly_app_key: "S0m3R@nd0mString0f32Ch@rsEx@ct1y"

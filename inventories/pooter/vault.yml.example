@@ -1,0 +1,51 @@
+---
+# Template for inventories/pooter/group_vars/pooter/vault.yml
+#
+# This file is NOT loaded by Ansible (it lives outside group_vars on purpose).
+# Do not put real values in it. Create the encrypted vault with:
+#
+#   ansible-vault create inventories/pooter/group_vars/pooter/vault.yml
+#
+# and paste the keys below with real values. Generate passwords with:
+#
+#   openssl rand -base64 24
+#
+# NOTE: database passwords are only read when a database is first created. For apps that are
+# already running (Nextcloud, Paperless), put their CURRENT passwords here, or change the
+# password inside the database first.
+
+# Bookstack
+vault_bookstack_db_password: "CHANGE_ME"
+vault_bookstack_db_root_password: "CHANGE_ME"
+
+# Part-DB
+vault_partdb_db_password: "CHANGE_ME"
+vault_partdb_db_root_password: "CHANGE_ME"
+
+# Nextcloud (previous defaults: nextcloud-pass / nextcloud-secret)
+vault_nextcloud_sql_password: "CHANGE_ME"
+vault_nextcloud_sql_root_password: "CHANGE_ME"
+
+# Paperless (previous default: paperless)
+vault_paperless_ng_postgres_password: "CHANGE_ME"
+
+# Cloudflare API token - needs Zone:Read and DNS:Edit permissions
+vault_cloudflare_token: "CHANGE_ME"
+
+###
+### Only needed once you enable these apps
+###
+
+# Firefly III. The app key must be exactly 32 characters:
+#   head /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9' | head -c 32
+vault_firefly_db_password: "CHANGE_ME"
+vault_firefly_db_root_password: "CHANGE_ME"
+vault_firefly_app_key: "CHANGE_ME_TO_32_CHARACTERS_XXXXX"
+
+# Gitea
+vault_gitea_db_password: "CHANGE_ME"
+vault_gitea_db_root_password: "CHANGE_ME"
+
+# Miniflux
+vault_miniflux_db_password: "CHANGE_ME"
+vault_miniflux_admin_password: "CHANGE_ME"

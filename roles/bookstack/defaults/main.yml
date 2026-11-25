@@ -10,18 +10,27 @@ bookstack_db_config_directory: "{{ docker_home }}/bookstack/mysql"
 bookstack_container_name: bookstack
 bookstack_container_store: linuxserver
 bookstack_version: "latest"
+bookstack_user_id: "1000"
+bookstack_group_id: "1000"
 
 # network
 bookstack_hostname: "bookstack"
+bookstack_network_name: "bookstack"
 bookstack_port_http: "6875"
+
+# the URL Bookstack generates links with - must match how you access it
+bookstack_app_url: "{{ 'https://' + bookstack_hostname + '.' + ansible_nas_domain if bookstack_available_externally else 'http://' + ansible_default_ipv4.address + ':' + bookstack_port_http }}"
 
 # specs
 bookstack_memory: 1g
 
 # database
 bookstack_db_container: bookstack_db
-bookstack_db_root_password: "{{ mysql_root_password }}"
+bookstack_db_image_name: "linuxserver/mariadb"
+bookstack_db_image_version: "latest"
 bookstack_db_name: bookstackapp
 bookstack_db_user: bookstack
-bookstack_db_host: bookstack_db
-bookstack_root_password: "{{ mysql_root_password }}"
+# change these!
+bookstack_db_password: "bookstack-pass"
+bookstack_db_root_password: "bookstack-root-pass"
+bookstack_db_memory: 512m

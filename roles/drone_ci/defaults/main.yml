@@ -21,7 +21,7 @@ drone_ci_runner_container_name: drone-ci-runner
 
 # Drone-CI Application Config
 # the users that'll be granted admin, comma separated. Should match a gitea user.
-drone_ci_admin_user: david
+drone_ci_admin_user: admin
 
 # shared secret - use openssl rand -hex 16 to generate your own
 drone_ci_agent_secret: d052ab29a86a02c6b6ff1e5851ee15e1

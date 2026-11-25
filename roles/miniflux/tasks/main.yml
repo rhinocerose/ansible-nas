@@ -23,8 +23,8 @@
         volumes:
           - "{{ miniflux_data_directory }}/postgres:/var/lib/postgresql/data:rw"
         env:
-          POSTGRES_USER: "miniflux"
-          POSTGRES_PASSWORD: "supersecure"
+          POSTGRES_USER: "{{ miniflux_db_user }}"
+          POSTGRES_PASSWORD: "{{ miniflux_db_password }}"
         restart_policy: unless-stopped
         memory: "{{ miniflux_postgres_memory }}"
 
@@ -39,7 +39,7 @@
         ports:
           - "{{ miniflux_port }}:8080"
         env:
-          DATABASE_URL: "postgres://miniflux:supersecure@{{ miniflux_db_container_name }}/miniflux?sslmode=disable"
+          DATABASE_URL: "postgres://{{ miniflux_db_user | urlencode }}:{{ miniflux_db_password | urlencode }}@{{ miniflux_db_container_name }}/{{ miniflux_db_user }}?sslmode=disable"
           RUN_MIGRATIONS: "1"
           CREATE_ADMIN: "1"
           ADMIN_USERNAME: "{{ miniflux_admin_username }}"

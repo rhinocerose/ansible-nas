@@ -8,6 +8,11 @@ roles/bertvv.samba
 roles/geerlingguy.docker
 roles/geerlingguy.nfs
 
+# Ansible Vault password files - never commit these
+.vault-pass*
+*.vault-pass
+.ansible-nas-vault-pass
+
 # Vim
 [._]sw[a-p]
 

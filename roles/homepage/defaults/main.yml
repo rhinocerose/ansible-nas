@@ -51,6 +51,10 @@ homepage_widgets_yaml:
       units: metric # only used by cpu temp
       refresh: 60000 # optional, in ms
 
+homepage_docker_yaml:
+  local:
+    socket: /var/run/docker.sock
+
 homepage_bookmarks_yaml:
   - Developer:
       - "Ansible-NAS":

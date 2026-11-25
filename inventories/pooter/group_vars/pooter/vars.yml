@@ -145,7 +145,7 @@ samba_shares:
     guest_ok: yes
     public: yes
     writable: yes
-    browsable: yes
+    browseable: yes
     path: "{{ audiobooks_root }}"
 
   - name: comics
@@ -226,7 +226,6 @@ glances_enabled: true
 
 ## Network
 traefik_enabled: true
-ddns_updater_enabled: true
 cloudflare_ddns_enabled: true
 watchtower_enabled: true
 
@@ -243,3 +242,50 @@ nextcloud_enabled: true
 
 bookstack_enabled: true
 partdb_enabled: true
+
+###
+### Secrets
+###
+# Real values live in the encrypted vault.yml next to this file.
+# Create it with:   ansible-vault create inventories/pooter/group_vars/pooter/vault.yml
+# Edit it with:     ansible-vault edit inventories/pooter/group_vars/pooter/vault.yml
+# Template:         inventories/pooter/vault.yml.example
+# Keep the vault_ prefix so it's obvious which values come from the vault.
+
+# Bookstack
+bookstack_db_password: "{{ vault_bookstack_db_password }}"
+bookstack_db_root_password: "{{ vault_bookstack_db_root_password }}"
+
+# Part-DB
+partdb_db_password: "{{ vault_partdb_db_password }}"
+partdb_db_root_password: "{{ vault_partdb_db_root_password }}"
+
+# Nextcloud
+nextcloud_sql_password: "{{ vault_nextcloud_sql_password }}"
+nextcloud_sql_root_password: "{{ vault_nextcloud_sql_root_password }}"
+
+# Paperless
+paperless_ng_postgres_password: "{{ vault_paperless_ng_postgres_password }}"
+
+# Cloudflare - used by both cloudflare_ddns and Traefik's DNS challenge.
+# Setting traefik_environment_variables replaces the role default entirely, so add any other
+# Traefik env vars here too.
+cloudflare_token: "{{ vault_cloudflare_token }}"
+traefik_environment_variables:
+  CF_DNS_API_TOKEN: "{{ vault_cloudflare_token }}"
+
+# Apps not currently enabled. These are only read when the app is enabled, so the matching
+# vault_ keys can wait until then - the run will stop with "vault_... is undefined" until added.
+
+# Firefly III
+firefly_db_password: "{{ vault_firefly_db_password }}"
+firefly_db_root_password: "{{ vault_firefly_db_root_password }}"
+firefly_app_key: "{{ vault_firefly_app_key }}"
+
+# Gitea
+gitea_db_password: "{{ vault_gitea_db_password }}"
+gitea_db_root_password: "{{ vault_gitea_db_root_password }}"
+
+# Miniflux
+miniflux_db_password: "{{ vault_miniflux_db_password }}"
+miniflux_admin_password: "{{ vault_miniflux_admin_password }}"

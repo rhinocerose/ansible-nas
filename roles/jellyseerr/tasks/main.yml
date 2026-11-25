@@ -30,7 +30,7 @@
           traefik.http.routers.jellyseerr.tls.certresolver: "letsencrypt"
           traefik.http.routers.jellyseerr.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.jellyseerr.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
-          traefik.http.services.jellyseerr.loadbalancer.server.port: "{{ jellyseerr_webui_port }}"
+          traefik.http.services.jellyseerr.loadbalancer.server.port: "5055"
   when: jellyseerr_enabled is true
 
 - name: Stop jellyseerr

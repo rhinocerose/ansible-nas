@@ -1,21 +1,9 @@
 ---
-- name: Install python3-pip
-  ansible.builtin.apt:
-    name: python3-pip
-    state: present
-  register: result
-  until: result is succeeded
-
-- name: Remove docker-py python module
-  ansible.builtin.pip:
-    name: docker-py
-    state: absent
-  register: result
-  until: result is succeeded
-
+# Installed from apt rather than pip: Debian 12+ / Ubuntu 23.04+ block system-wide pip
+# installs (PEP 668), and the distro package stays in step with the system Python.
 - name: Install docker python module
-  ansible.builtin.pip:
-    name: docker
+  ansible.builtin.apt:
+    name: python3-docker
     state: present
   register: result
   until: result is succeeded

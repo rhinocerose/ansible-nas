@@ -6,7 +6,7 @@
         {
             "label": "Run Playbook",
             "type": "shell",
-            "command": "ansible-playbook -i inventory nas.yml -b -K",
+            "command": "ansible-playbook -i inventories/pooter/inventory nas.yml -b -K",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -15,7 +15,7 @@
         {
             "label": "Run Playbook Syntax Check",
             "type": "shell",
-            "command": "ansible-playbook -i inventory nas.yml --syntax-check",
+            "command": "ansible-playbook -i inventories/pooter/inventory nas.yml --syntax-check",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -28,15 +28,21 @@
             "group": "test"
         },
         {
-            "label": "Serve docs locally (mkdocs serve)",
+            "label": "Serve docs locally (Docusaurus)",
             "type": "shell",
-            "command": "mkdocs serve",
+            "command": "npm start",
+            "options": {
+                "cwd": "${workspaceFolder}/website"
+            },
             "group": "test"
         },
         {
-            "label": "Deploy docs to GitHub (mkdocs gh-deploy)",
+            "label": "Build docs (Docusaurus)",
             "type": "shell",
-            "command": "mkdocs gh-deploy",
+            "command": "npm run build",
+            "options": {
+                "cwd": "${workspaceFolder}/website"
+            },
             "group": "build"
         }
     ]

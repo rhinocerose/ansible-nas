@@ -6,7 +6,7 @@
     ###
     ### Requirements
     ###
-    - role: ansible-nas-users
+    - role: ansible_nas_users
       tags:
         - ansible-nas-users
         - ansible-nas
@@ -36,12 +36,12 @@
     ###
     ### Ansible-NAS Roles
     ###
-    - role: ansible-nas-general
+    - role: ansible_nas_general
       tags:
         - ansible-nas-general
         - ansible-nas
 
-    - role: ansible-nas-docker
+    - role: ansible_nas_docker
       tags:
         - ansible-nas-docker
         - ansible-nas
@@ -81,7 +81,7 @@
       tags:
         - cloudflare_ddns
 
-    - role: code-server
+    - role: code_server
       tags:
         - code-server
 
@@ -101,7 +101,7 @@
       tags:
         - dokuwiki
 
-    - role: drone-ci
+    - role: drone_ci
       tags:
         - drone_ci
 
@@ -153,7 +153,7 @@
       tags:
         - guacamole
 
-    - role: healthchecks.io
+    - role: healthchecks_io
       tags:
         - healthchecks.io
 
@@ -173,6 +173,10 @@
       tags:
         - homebridge
 
+    - role: homepage
+      tags:
+        - homepage
+
     - role: jackett
       tags:
         - jackett
@@ -180,6 +184,10 @@
     - role: jellyfin
       tags:
         - jellyfin
+
+    - role: jellyseerr
+      tags:
+        - jellyseerr
 
     - role: joomla
       tags:
@@ -201,9 +209,13 @@
       tags:
         - mealie
 
-    - role: minecraft-server
+    - role: minecraft_server
       tags:
         - minecraft-server
+
+    - role: minecraft_bedrock_server
+      tags:
+        - minecraft-bedrock-server
 
     - role: minidlna
       tags:
@@ -281,7 +293,7 @@
       tags:
         - paperless_ng
 
-    - role: parts-db
+    - role: partdb
       tags:
         - parts-db
         
@@ -341,7 +353,7 @@
       tags:
         - soulseek
 
-    - role: speedtest-tracker
+    - role: speedtest_tracker
       tags:
         - speedtest-tracker
 
@@ -381,7 +393,7 @@
       tags:
         - transmission
 
-    - role: transmission-with-openvpn
+    - role: transmission_with_openvpn
       tags:
         - transmission_with_openvpn
 
@@ -409,7 +421,7 @@
       tags:
         - wireshark
 
-    - role: woodpecker-ci
+    - role: woodpecker_ci
       tags:
         - woodpecker_ci
 

@@ -12,3 +12,11 @@ repos:
     rev: v0.32.2
     hooks:
       - id: markdownlint
+  - repo: local
+    hooks:
+      - id: vault-encrypted
+        name: Ensure vault files are encrypted
+        language: pygrep
+        entry: '^\$ANSIBLE_VAULT;'
+        args: [--negate]
+        files: 'group_vars/.*/vault\.ya?ml$'

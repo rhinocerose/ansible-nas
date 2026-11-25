@@ -10,8 +10,9 @@
 
     - name: Template config files
       ansible.builtin.template:
-        src: "{{ item }}"
+        src: "{{ item }}.j2"
         dest: "{{ homepage_data_directory }}/{{ item }}"
+        mode: "0644"
       with_items:
         - bookmarks.yaml
         - docker.yaml

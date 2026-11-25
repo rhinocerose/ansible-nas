@@ -5,33 +5,42 @@
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
+        mode: "0755"
       with_items:
         - "{{ partdb_data_directory }}"
+        - "{{ partdb_db_data_directory }}"
 
-    - name: Mariadb Docker Container
+    - name: Create partdb network
+      community.docker.docker_network:
+        name: "{{ partdb_network_name }}"
+
+    - name: Partdb MariaDB Docker Container
       community.docker.docker_container:
         name: "{{ partdb_db_container }}"
-        image: "{{ mariadb_container_store }}/{{ mariadb_container_name }}:{{ mariadb_version }}"
+        image: "{{ partdb_db_image_name }}:{{ partdb_db_image_version }}"
         pull: true
+        networks:
+          - name: "{{ partdb_network_name }}"
+        network_mode: "{{ partdb_network_name }}"
         volumes:
-          - "{{ partdb_db_config_directory }}/mysql:/var/lib/mysql"
-        ports:
-          - "{{ mariadb_port }}:3306/tcp"
+          - "{{ partdb_db_data_directory }}:/var/lib/mysql"
         env:
-          TZ: "{{ system.timezone }}"
-          PUID: "{{ user_uid | string }}"
-          PGID: "{{ user_gid | string }}"
-          MYSQL_USER: "{{ partdb_db_user }}"
-          MYSQL_PASSWORD: "{{ partdb_db_root_password }}"
-          MYSQL_DATABASE: "{{ partdb_db_name }}"
-          MYSQL_ROOT_PASSWORD: "{{ partdb_db_root_password }}"
+          TZ: "{{ ansible_nas_timezone }}"
+          MARIADB_USER: "{{ partdb_db_user }}"
+          MARIADB_PASSWORD: "{{ partdb_db_password }}"
+          MARIADB_DATABASE: "{{ partdb_db_name }}"
+          MARIADB_ROOT_PASSWORD: "{{ partdb_db_root_password }}"
         restart_policy: unless-stopped
+        memory: "{{ partdb_db_memory }}"
 
     - name: Create partdb container
       community.docker.docker_container:
         name: "{{ partdb_container_name }}"
         image: "{{ partdb_image_name }}:{{ partdb_image_version }}"
         pull: true
+        networks:
+          - name: "{{ partdb_network_name }}"
+        network_mode: "{{ partdb_network_name }}"
         volumes:
           - "{{ partdb_data_directory }}/uploads:/var/www/html/uploads"
           - "{{ partdb_data_directory }}/public_media:/var/www/html/public/media"
@@ -40,6 +49,8 @@
           PUID: "{{ partdb_user_id }}"
           PGID: "{{ partdb_group_id }}"
           TZ: "{{ ansible_nas_timezone }}"
+          DATABASE_URL: "mysql://{{ partdb_db_user | urlencode }}:{{ partdb_db_password | urlencode }}@{{ partdb_db_container }}:3306/{{ partdb_db_name }}"
+          DB_AUTOMIGRATE: "true"
         ports:
           - "{{ partdb_port_http }}:80"
           - "{{ partdb_port_https }}:443"
@@ -58,6 +69,9 @@
   block:
     - name: Stop partdb
       community.docker.docker_container:
-        name: "{{ partdb_container_name }}"
+        name: "{{ item }}"
         state: absent
+      loop:
+        - "{{ partdb_container_name }}"
+        - "{{ partdb_db_container }}"
   when: partdb_enabled is false
