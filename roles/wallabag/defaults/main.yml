@@ -13,4 +13,5 @@ wallabag_hostname: wallabag
 wallabag_memory: 1g
 wallabag_container_name: "wallabag"
 wallabag_image_name: "wallabag/wallabag"
-wallabag_image_version: "2.6.19@sha256:957dd984804462367132482c37d7bd1512cabe8a9503ec22e06efddc2872942b"
+# 2.6.19 (digest pin; set to a tag such as "latest" to follow upstream instead)
+wallabag_image_version: "sha256:957dd984804462367132482c37d7bd1512cabe8a9503ec22e06efddc2872942b"

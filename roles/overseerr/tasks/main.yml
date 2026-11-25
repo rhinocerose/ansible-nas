@@ -12,7 +12,7 @@
     - name: Overseerr
       community.docker.docker_container:
         name: "{{ overseerr_container_name }}"
-        image: "{{ overseerr_image_name }}:{{ overseerr_image_version }}"
+        image: "{{ overseerr_image_name }}{{ '@' if overseerr_image_version is match('sha256:') else ':' }}{{ overseerr_image_version }}"
         pull: true
         volumes:
           - "{{ overseerr_data_directory }}/config:/app/config:rw"

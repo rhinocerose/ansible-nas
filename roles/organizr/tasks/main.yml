@@ -11,7 +11,7 @@
     - name: Create Organizr container
       community.docker.docker_container:
         name: "{{ organizr_container_name }}"
-        image: "{{ organizr_image_name }}:{{ organizr_image_version }}"
+        image: "{{ organizr_image_name }}{{ '@' if organizr_image_version is match('sha256:') else ':' }}{{ organizr_image_version }}"
         pull: true
         volumes:
           - "{{ organizr_data_directory }}:/config:rw"

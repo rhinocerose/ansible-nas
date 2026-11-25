@@ -13,7 +13,7 @@
     - name: Tautulli Docker Container
       community.docker.docker_container:
         name: "{{ tautulli_container_name }}"
-        image: "{{ tautulli_image_name }}:{{ tautulli_image_version }}"
+        image: "{{ tautulli_image_name }}{{ '@' if tautulli_image_version is match('sha256:') else ':' }}{{ tautulli_image_version }}"
         pull: true
         volumes:
           - "{{ tautulli_config_directory }}:/config:rw"

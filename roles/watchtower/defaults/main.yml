@@ -21,4 +21,5 @@ watchtower_memory: 1g
 
 watchtower_container_name: "watchtower"
 watchtower_image_name: "containrrr/watchtower"
-watchtower_image_version: "latest@sha256:6dd50763bbd632a83cb154d5451700530d1e44200b268a4e9488fefdfcf2b038"
+# latest as of 2026-11-25 (digest pin; set to a tag such as "latest" to follow upstream instead)
+watchtower_image_version: "sha256:6dd50763bbd632a83cb154d5451700530d1e44200b268a4e9488fefdfcf2b038"

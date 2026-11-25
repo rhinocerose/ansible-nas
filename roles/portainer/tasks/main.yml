@@ -11,7 +11,7 @@
     - name: Portainer Docker Container
       community.docker.docker_container:
         name: "{{ portainer_container_name }}"
-        image: "{{ portainer_image_name }}:{{ portainer_image_version }}"
+        image: "{{ portainer_image_name }}{{ '@' if portainer_image_version is match('sha256:') else ':' }}{{ portainer_image_version }}"
         pull: true
         volumes:
           - "{{ portainer_data_directory }}:/data:rw"

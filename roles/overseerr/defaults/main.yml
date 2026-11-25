@@ -8,7 +8,8 @@ overseerr_data_directory: "{{ docker_home }}/overseerr"
 # docker
 overseerr_container_name: "overseerr"
 overseerr_image_name: "sctx/overseerr"
-overseerr_image_version: "latest@sha256:6197516c9d7b58ccf113455e32aafb94df5d91995fe50e8c2cae6ba6c7c7b7de"
+# latest as of 2026-11-25 (digest pin; set to a tag such as "latest" to follow upstream instead)
+overseerr_image_version: "sha256:6197516c9d7b58ccf113455e32aafb94df5d91995fe50e8c2cae6ba6c7c7b7de"
 overseerr_user_id: "1000"
 overseerr_group_id: "1000"
 

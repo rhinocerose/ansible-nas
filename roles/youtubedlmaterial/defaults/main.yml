@@ -16,7 +16,8 @@ youtubedlmaterial_port_http: "8998"
 # docker
 youtubedlmaterial_container_name: "youtubedlmaterial"
 youtubedlmaterial_image_name: "tzahi12345/youtubedl-material"
-youtubedlmaterial_image_version: "4.3.2@sha256:2f943d584711cb07c3535b518939fabb2ab90fdd7452d9a9938cd05378468ed9"
+# 4.3.2 (digest pin; set to a tag such as "latest" to follow upstream instead)
+youtubedlmaterial_image_version: "sha256:2f943d584711cb07c3535b518939fabb2ab90fdd7452d9a9938cd05378468ed9"
 
 # specs
 youtubedlmaterial_memory: "1g"

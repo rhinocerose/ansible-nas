@@ -13,7 +13,8 @@ organizr_hostname: "organizr"
 # docker
 organizr_container_name: "organizr"
 organizr_image_name: "organizr/organizr"
-organizr_image_version: "latest@sha256:52183b1eeb25632e68b677adafbcbaa5436d62cbbbe049edd4fcfa527baa0b1d"
+# latest as of 2026-11-25 (digest pin; set to a tag such as "latest" to follow upstream instead)
+organizr_image_version: "sha256:52183b1eeb25632e68b677adafbcbaa5436d62cbbbe049edd4fcfa527baa0b1d"
 organizr_user_id: "1000"
 organizr_group_id: "1000"
 

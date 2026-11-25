@@ -17,7 +17,8 @@ pyload_port: "8000"
 # docker
 pyload_container_name: "pyload"
 pyload_image_name: "writl/pyload"
-pyload_image_version: "18.04@sha256:99875ba4ec3da994eab332fabece86ab66956b3338f1e23000328d000bc2141f"
+# 18.04 (digest pin; set to a tag such as "latest" to follow upstream instead)
+pyload_image_version: "sha256:99875ba4ec3da994eab332fabece86ab66956b3338f1e23000328d000bc2141f"
 
 # specs
 pyload_memory: "1g"

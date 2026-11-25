@@ -19,4 +19,5 @@ airsonic_container_name: airsonic
 
 # image (pinned to the image running on the NAS; set to "latest" to follow upstream)
 airsonic_image_name: "airsonic/airsonic"
-airsonic_image_version: "latest@sha256:2222c5710cca2c6396e90151cab6e2af17110006100f8895d35dcf27aa7af551"
+# latest as of 2026-11-25 (digest pin; set to a tag such as "latest" to follow upstream instead)
+airsonic_image_version: "sha256:2222c5710cca2c6396e90151cab6e2af17110006100f8895d35dcf27aa7af551"

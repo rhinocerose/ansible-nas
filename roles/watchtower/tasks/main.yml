@@ -4,7 +4,7 @@
     - name: Watchtower Docker Container
       community.docker.docker_container:
         name: "{{ watchtower_container_name }}"
-        image: "{{ watchtower_image_name }}:{{ watchtower_image_version }}"
+        image: "{{ watchtower_image_name }}{{ '@' if watchtower_image_version is match('sha256:') else ':' }}{{ watchtower_image_version }}"
         pull: true
         volumes:
           - "/var/run/docker.sock:/var/run/docker.sock"

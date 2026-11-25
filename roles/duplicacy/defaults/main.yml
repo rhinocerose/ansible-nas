@@ -28,4 +28,5 @@ duplicacy_container_name: duplicacy
 
 # image (pinned to the image running on the NAS; set to "latest" to follow upstream)
 duplicacy_image_name: "saspus/duplicacy-web"
-duplicacy_image_version: "mini@sha256:4631f11ee2d276c619877a16fa1ff01c08aeac215a91a4ae3445aa557dcc5f58"
+# mini (digest pin; set to a tag such as "latest" to follow upstream instead)
+duplicacy_image_version: "sha256:4631f11ee2d276c619877a16fa1ff01c08aeac215a91a4ae3445aa557dcc5f58"

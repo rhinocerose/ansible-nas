@@ -11,7 +11,7 @@
     - name: Bazarr
       community.docker.docker_container:
         name: "{{ bazarr_container_name }}"
-        image: "{{ bazarr_image_name }}:{{ bazarr_image_version }}"
+        image: "{{ bazarr_image_name }}{{ '@' if bazarr_image_version is match('sha256:') else ':' }}{{ bazarr_image_version }}"
         pull: true
         volumes:
           - "{{ bazarr_tv_directory }}:/tv:rw"

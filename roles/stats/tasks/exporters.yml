@@ -4,7 +4,7 @@
     - name: Smartctl Exporter Docker Container
       community.docker.docker_container:
         name: "{{ stats_smartctl_container_name }}"
-        image: "{{ stats_smartctl_docker_image_name }}:{{ stats_smartctl_docker_image_version }}"
+        image: "{{ stats_smartctl_docker_image_name }}{{ '@' if stats_smartctl_docker_image_version is match('sha256:') else ':' }}{{ stats_smartctl_docker_image_version }}"
         pull: true
         privileged: true
         ports:
@@ -15,7 +15,7 @@
     - name: Speedtest Exporter Docker Container
       community.docker.docker_container:
         name: "{{ stats_speedtest_container_name }}"
-        image: "{{ stats_speedtest_docker_image_name }}:{{ stats_speedtest_docker_image_version }}"
+        image: "{{ stats_speedtest_docker_image_name }}{{ '@' if stats_speedtest_docker_image_version is match('sha256:') else ':' }}{{ stats_speedtest_docker_image_version }}"
         pull: true
         ports:
           "{{ stats_speedtest_exporter_port }}:9798"

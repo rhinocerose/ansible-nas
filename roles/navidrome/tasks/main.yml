@@ -13,7 +13,7 @@
     - name: Navidrome Docker Container
       community.docker.docker_container:
         name: "{{ navidrome_container_name }}"
-        image: "{{ navidrome_image_name }}:{{ navidrome_image_version }}"
+        image: "{{ navidrome_image_name }}{{ '@' if navidrome_image_version is match('sha256:') else ':' }}{{ navidrome_image_version }}"
         pull: true
         volumes:
           - "{{ navidrome_data_directory }}/data:/navidrome/data:rw"

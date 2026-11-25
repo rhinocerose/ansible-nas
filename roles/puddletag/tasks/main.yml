@@ -11,7 +11,7 @@
     - name: Puddletag Docker Container
       community.docker.docker_container:
         name: "{{ puddletag_container_name }}"
-        image: "{{ puddletag_image_name }}:{{ puddletag_image_version }}"
+        image: "{{ puddletag_image_name }}{{ '@' if puddletag_image_version is match('sha256:') else ':' }}{{ puddletag_image_version }}"
         pull: true
         volumes:
           - "{{ puddletag_data_directory }}:/config:rw"

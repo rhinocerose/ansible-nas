@@ -15,7 +15,7 @@
     - name: Wallabag Docker Container
       community.docker.docker_container:
         name: "{{ wallabag_container_name }}"
-        image: "{{ wallabag_image_name }}:{{ wallabag_image_version }}"
+        image: "{{ wallabag_image_name }}{{ '@' if wallabag_image_version is match('sha256:') else ':' }}{{ wallabag_image_version }}"
         pull: true
         volumes:
           - "{{ wallabag_data_directory }}/data:/var/www/wallabag/data:rw"

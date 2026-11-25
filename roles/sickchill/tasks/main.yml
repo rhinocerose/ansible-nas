@@ -12,7 +12,7 @@
     - name: Sickchill Docker Container
       community.docker.docker_container:
         name: "{{ sickchill_container_name }}"
-        image: "{{ sickchill_image_name }}:{{ sickchill_image_version }}"
+        image: "{{ sickchill_image_name }}{{ '@' if sickchill_image_version is match('sha256:') else ':' }}{{ sickchill_image_version }}"
         pull: true
         volumes:
           - "{{ sickchill_config_directory }}:/config:rw"

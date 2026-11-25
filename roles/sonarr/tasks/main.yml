@@ -11,7 +11,7 @@
     - name: Sonarr
       community.docker.docker_container:
         name: "{{ sonarr_container_name }}"
-        image: "{{ sonarr_image_name }}:{{ sonarr_image_version }}"
+        image: "{{ sonarr_image_name }}{{ '@' if sonarr_image_version is match('sha256:') else ':' }}{{ sonarr_image_version }}"
         pull: true
         volumes:
           - "{{ sonarr_tv_directory }}:/tv:rw"

@@ -13,7 +13,7 @@
     - name: Duplicacy Docker Container
       community.docker.docker_container:
         name: "{{ duplicacy_container_name }}"
-        image: "{{ duplicacy_image_name }}:{{ duplicacy_image_version }}"
+        image: "{{ duplicacy_image_name }}{{ '@' if duplicacy_image_version is match('sha256:') else ':' }}{{ duplicacy_image_version }}"
         hostname: "{{ duplicacy_hostname }}"
         pull: true
         ports:

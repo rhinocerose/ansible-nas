@@ -13,7 +13,7 @@
     - name: Create pyLoad Docker Container
       community.docker.docker_container:
         name: "{{ pyload_container_name }}"
-        image: "{{ pyload_image_name }}:{{ pyload_image_version }}"
+        image: "{{ pyload_image_name }}{{ '@' if pyload_image_version is match('sha256:') else ':' }}{{ pyload_image_version }}"
         pull: true
         volumes:
           - "{{ pyload_config_directory }}:/opt/pyload/pyload-config:rw"

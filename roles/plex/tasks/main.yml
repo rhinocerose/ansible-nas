@@ -13,7 +13,7 @@
     - name: Create Plex Docker Container
       community.docker.docker_container:
         name: "{{ plex_container_name }}"
-        image: "{{ plex_image_name }}:{{ plex_image_version }}"
+        image: "{{ plex_image_name }}{{ '@' if plex_image_version is match('sha256:') else ':' }}{{ plex_image_version }}"
         pull: true
         volumes:
           - "{{ plex_config_directory }}:/config:rw"

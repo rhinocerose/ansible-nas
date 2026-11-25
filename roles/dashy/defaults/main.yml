@@ -17,4 +17,5 @@ dashy_container_name: dashy
 
 # image (pinned to the image running on the NAS; set to "latest" to follow upstream)
 dashy_image_name: "lissy93/dashy"
-dashy_image_version: "4.10.0@sha256:c181b9d1fdfce269546755c4456f63152d3690dac80fb32d159053089bcc8199"
+# 4.10.0 (digest pin; set to a tag such as "latest" to follow upstream instead)
+dashy_image_version: "sha256:c181b9d1fdfce269546755c4456f63152d3690dac80fb32d159053089bcc8199"

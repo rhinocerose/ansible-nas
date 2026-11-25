@@ -20,7 +20,7 @@
     - name: Cloudflare Dynamic DNS Container
       community.docker.docker_container:
         name: "{{ cloudflare_ddns_container_name }}"
-        image: "{{ cloudflare_ddns_image_name }}:{{ cloudflare_ddns_image_version }}"
+        image: "{{ cloudflare_ddns_image_name }}{{ '@' if cloudflare_ddns_image_version is match('sha256:') else ':' }}{{ cloudflare_ddns_image_version }}"
         pull: true
         volumes:
           - "{{ cloudflare_ddns_data_directory }}/config.yml:/app/config.yaml"

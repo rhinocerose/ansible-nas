@@ -11,7 +11,7 @@
     - name: Radarr
       community.docker.docker_container:
         name: "{{ radarr_container_name }}"
-        image: "{{ radarr_image_name }}:{{ radarr_image_version }}"
+        image: "{{ radarr_image_name }}{{ '@' if radarr_image_version is match('sha256:') else ':' }}{{ radarr_image_version }}"
         pull: true
         volumes:
           - "{{ radarr_movies_directory }}:/movies:rw"

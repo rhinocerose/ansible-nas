@@ -15,7 +15,8 @@ glances_security_options:
 # docker
 glances_container_name: "glances"
 glances_image_name: "nicolargo/glances"
-glances_image_version: "v4.5.9@sha256:a8a1614c2d531f8bd66125050968be3317c093484c82730cc96c83a2df3c732c"
+# v4.5.9 (digest pin; set to a tag such as "latest" to follow upstream instead)
+glances_image_version: "sha256:a8a1614c2d531f8bd66125050968be3317c093484c82730cc96c83a2df3c732c"
 
 # specs
 glances_memory: 1g

@@ -11,7 +11,7 @@
     - name: Dupicati Docker Container
       community.docker.docker_container:
         name: "{{ duplicati_container_name }}"
-        image: "{{ duplicati_image_name }}:{{ duplicati_image_version }}"
+        image: "{{ duplicati_image_name }}{{ '@' if duplicati_image_version is match('sha256:') else ':' }}{{ duplicati_image_version }}"
         pull: true
         ports:
           - "{{ duplicati_port }}:8200"

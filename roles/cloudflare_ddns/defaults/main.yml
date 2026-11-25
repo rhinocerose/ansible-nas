@@ -30,4 +30,5 @@ cloudflare_ddns_container_name: cloudflare-ddns
 
 # image (pinned to the image running on the NAS; set to "latest" to follow upstream)
 cloudflare_ddns_image_name: "joshava/cloudflare-ddns"
-cloudflare_ddns_image_version: "2.9.3@sha256:33942fdb59bfef28de5a8f7d2b395254d037fbfe844ff30d1a00f20611929492"
+# 2.9.3 (digest pin; set to a tag such as "latest" to follow upstream instead)
+cloudflare_ddns_image_version: "sha256:33942fdb59bfef28de5a8f7d2b395254d037fbfe844ff30d1a00f20611929492"

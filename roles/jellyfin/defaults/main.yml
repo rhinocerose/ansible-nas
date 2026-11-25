@@ -32,7 +32,8 @@ jellyfin_port_https: "8928"
 # docker
 jellyfin_container_name: "jellyfin"
 jellyfin_image_name: "linuxserver/jellyfin"
-jellyfin_image_version: "12.4ubu2604-ls61@sha256:1c60c32d1de1529cc58ea6c7879dd47f89d0d88082b085a66214243de3150b5c"
+# 12.4ubu2604-ls61 (digest pin; set to a tag such as "latest" to follow upstream instead)
+jellyfin_image_version: "sha256:1c60c32d1de1529cc58ea6c7879dd47f89d0d88082b085a66214243de3150b5c"
 
 # specs
 jellyfin_memory: "1g"

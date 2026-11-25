@@ -11,7 +11,7 @@
     - name: Mealie Docker Container
       community.docker.docker_container:
         name: "{{ mealie_container_name }}"
-        image: "{{ mealie_image_name }}:{{ mealie_image_version }}"
+        image: "{{ mealie_image_name }}{{ '@' if mealie_image_version is match('sha256:') else ':' }}{{ mealie_image_version }}"
         pull: true
         volumes:
           - "{{ mealie_data_directory }}:/app/data:rw"

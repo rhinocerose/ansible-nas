@@ -18,7 +18,7 @@
     - name: Traefik Docker Container
       community.docker.docker_container:
         name: "{{ traefik_container_name }}"
-        image: "{{ traefik_image_name }}:{{ traefik_image_version }}"
+        image: "{{ traefik_image_name }}{{ '@' if traefik_image_version is match('sha256:') else ':' }}{{ traefik_image_version }}"
         pull: true
         network_mode: host
         volumes:

@@ -9,7 +9,7 @@
     - name: Lidarr Docker Container
       community.docker.docker_container:
         name: "{{ lidarr_container_name }}"
-        image: "{{ lidarr_image_name }}:{{ lidarr_image_version }}"
+        image: "{{ lidarr_image_name }}{{ '@' if lidarr_image_version is match('sha256:') else ':' }}{{ lidarr_image_version }}"
         pull: true
         volumes:
           - "{{ lidarr_music_directory }}:/music:rw"

@@ -18,7 +18,8 @@ radarr_hostname: "radarr"
 # docker
 radarr_container_name: "radarr"
 radarr_image_name: "linuxserver/radarr"
-radarr_image_version: "7.0.3.10918-ls328@sha256:044788f5508b7f67a3e0368cdd142c77c4d4cd5aec2efaba53e1a68b6b6231e7"
+# 7.0.3.10918-ls328 (digest pin; set to a tag such as "latest" to follow upstream instead)
+radarr_image_version: "sha256:044788f5508b7f67a3e0368cdd142c77c4d4cd5aec2efaba53e1a68b6b6231e7"
 
 # specs
 radarr_memory: 1g

@@ -22,7 +22,8 @@ syncthing_hostname: syncthing
 # docker
 syncthing_container_name: "syncthing"
 syncthing_image_name: "syncthing/syncthing"
-syncthing_image_version: "v2.1.7@sha256:2b71da7c0d0a91a6ae5285ad079226fecc0a365d08b27720e1f7037b018f7546"
+# v2.1.7 (digest pin; set to a tag such as "latest" to follow upstream instead)
+syncthing_image_version: "sha256:2b71da7c0d0a91a6ae5285ad079226fecc0a365d08b27720e1f7037b018f7546"
 
 # specs
 syncthing_memory: 1g

@@ -4,8 +4,9 @@ heimdall_available_externally: false
 
 # directories
 heimdall_image_name: "linuxserver/heimdall"
-heimdall_image_version: "v2.8.4-ls375@sha256:51693bcb3a46e619592a4f7aad65d6610f8bda80c3b167d03254a96a944e8aed"
-heimdall_docker_image: "{{ heimdall_image_name }}:{{ heimdall_image_version }}"
+# v2.8.4-ls375 (digest pin; set to a tag such as "latest" to follow upstream instead)
+heimdall_image_version: "sha256:51693bcb3a46e619592a4f7aad65d6610f8bda80c3b167d03254a96a944e8aed"
+heimdall_docker_image: "{{ heimdall_image_name }}{{ '@' if heimdall_image_version is match('sha256:') else ':' }}{{ heimdall_image_version }}"
 heimdall_data_directory: "{{ docker_home }}/heimdall"
 
 # network

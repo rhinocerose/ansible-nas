@@ -18,7 +18,8 @@ lidarr_hostname: "lidarr"
 # docker
 lidarr_container_name: "lidarr"
 lidarr_image_name: "linuxserver/lidarr"
-lidarr_image_version: "3.1.6.5079-ls49@sha256:8fb40ada166dd1880cb1b166df5bcbb081107523f20ab60df05c313e2052a467"
+# 3.1.6.5079-ls49 (digest pin; set to a tag such as "latest" to follow upstream instead)
+lidarr_image_version: "sha256:8fb40ada166dd1880cb1b166df5bcbb081107523f20ab60df05c313e2052a467"
 
 # specs
 lidarr_memory: 1g

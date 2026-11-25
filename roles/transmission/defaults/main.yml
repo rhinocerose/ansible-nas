@@ -20,7 +20,8 @@ transmission_timezone: "{{ ansible_nas_timezone }}"
 
 transmission_container_name: "transmission"
 transmission_image_name: "linuxserver/transmission"
-transmission_image_version: "4.1.4-r0-ls371@sha256:3a8ecd4ebbc9ec657ccddba674a067db20eb28a25d61146698580d724599c7cb"
+# 4.1.4-r0-ls371 (digest pin; set to a tag such as "latest" to follow upstream instead)
+transmission_image_version: "sha256:3a8ecd4ebbc9ec657ccddba674a067db20eb28a25d61146698580d724599c7cb"
 
 # specs
 transmission_memory: 1g

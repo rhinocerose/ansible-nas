@@ -16,7 +16,8 @@ tautulli_port: "8185"
 # docker
 tautulli_container_name: "tautulli"
 tautulli_image_name: "linuxserver/tautulli"
-tautulli_image_version: "v2.19.1-ls252@sha256:5e8f80cc18f03c606a3567c8a9b37d80812ed8017d2e2f8ff2e2a91b54a3aef1"
+# v2.19.1-ls252 (digest pin; set to a tag such as "latest" to follow upstream instead)
+tautulli_image_version: "sha256:5e8f80cc18f03c606a3567c8a9b37d80812ed8017d2e2f8ff2e2a91b54a3aef1"
 
 # specs
 tautulli_memory: "1g"

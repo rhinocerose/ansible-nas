@@ -11,7 +11,7 @@
     - name: Syncthing Docker Container
       community.docker.docker_container:
         name: "{{ syncthing_container_name }}"
-        image: "{{ syncthing_image_name }}:{{ syncthing_image_version }}"
+        image: "{{ syncthing_image_name }}{{ '@' if syncthing_image_version is match('sha256:') else ':' }}{{ syncthing_image_version }}"
         pull: true
         ports:
           - "{{ syncthing_port }}:8384"

@@ -11,7 +11,7 @@
     - name: Jellyfin Docker Container
       community.docker.docker_container:
         name: "{{ jellyfin_container_name }}"
-        image: "{{ jellyfin_image_name }}:{{ jellyfin_image_version }}"
+        image: "{{ jellyfin_image_name }}{{ '@' if jellyfin_image_version is match('sha256:') else ':' }}{{ jellyfin_image_version }}"
         pull: true
         volumes:
           - "{{ jellyfin_config_directory }}:/config:rw"

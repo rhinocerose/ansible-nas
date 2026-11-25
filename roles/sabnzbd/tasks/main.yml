@@ -11,7 +11,7 @@
     - name: Sabnzbd
       community.docker.docker_container:
         name: "{{ sabnzbd_container_name }}"
-        image: "{{ sabnzbd_image_name }}:{{ sabnzbd_image_version }}"
+        image: "{{ sabnzbd_image_name }}{{ '@' if sabnzbd_image_version is match('sha256:') else ':' }}{{ sabnzbd_image_version }}"
         pull: true
         volumes:
           - "{{ sabnzbd_data_directory }}:/config:rw"

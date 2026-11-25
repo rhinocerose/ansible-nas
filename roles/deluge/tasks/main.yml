@@ -12,7 +12,7 @@
     - name: Deluge Docker Container
       community.docker.docker_container:
         name: deluge
-        image: "{{ deluge_image_name }}:{{ deluge_image_version }}"
+        image: "{{ deluge_image_name }}{{ '@' if deluge_image_version is match('sha256:') else ':' }}{{ deluge_image_version }}"
         pull: true
         volumes:
           - "{{ deluge_config_directory }}:/config:rw"

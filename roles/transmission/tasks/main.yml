@@ -14,7 +14,7 @@
     - name: Transmission Docker Container
       community.docker.docker_container:
         name: "{{ transmission_container_name }}"
-        image: "{{ transmission_image_name }}:{{ transmission_image_version }}"
+        image: "{{ transmission_image_name }}{{ '@' if transmission_image_version is match('sha256:') else ':' }}{{ transmission_image_version }}"
         pull: true
         volumes:
           - "{{ transmission_config_directory }}:/config:rw"
