@@ -33,10 +33,10 @@ stats_telegraf_image_name: "telegraf"
 stats_telegraf_image_version: "latest"
 stats_smartctl_container_name: "stats-smartctl"
 stats_smartctl_docker_image_name: "matusnovak/prometheus-smartctl"
-stats_smartctl_docker_image_version: "latest"
+stats_smartctl_docker_image_version: "v2.5.0@sha256:58cce18e2cfec5766a96a0a7ddc1fa418726d92e38664d23353cca57bea3818a"
 stats_speedtest_container_name: "stats-speedtest"
 stats_speedtest_docker_image_name: "miguelndecarvalho/speedtest-exporter"
-stats_speedtest_docker_image_version: "latest"
+stats_speedtest_docker_image_version: "latest@sha256:f1064d49124c7fc45faabb87c6c876a2fd04e92b3dc14d4b871301217ba30fed"
 
 # specs
 stats_telegraf_memory: 1g

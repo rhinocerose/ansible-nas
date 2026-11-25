@@ -13,6 +13,7 @@
     - name: Create partdb network
       community.docker.docker_network:
         name: "{{ partdb_network_name }}"
+      register: partdb_network_result
 
     - name: Partdb MariaDB Docker Container
       community.docker.docker_container:
@@ -32,6 +33,7 @@
           MARIADB_ROOT_PASSWORD: "{{ partdb_db_root_password }}"
         restart_policy: unless-stopped
         memory: "{{ partdb_db_memory }}"
+      when: not (ansible_check_mode and partdb_network_result is changed) # network only exists after a real run
 
     - name: Create partdb container
       community.docker.docker_container:
@@ -63,6 +65,7 @@
           traefik.http.routers.partdb.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.partdb.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.partdb.loadbalancer.server.port: "80"
+      when: not (ansible_check_mode and partdb_network_result is changed) # network only exists after a real run
   when: partdb_enabled is true
 
 - name: Stop partdb

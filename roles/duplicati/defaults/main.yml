@@ -20,3 +20,7 @@ duplicati_memory: 1g
 
 # docker
 duplicati_container_name: duplicati
+
+# image (pinned to the image running on the NAS; set to "latest" to follow upstream)
+duplicati_image_name: "linuxserver/duplicati"
+duplicati_image_version: "v2.4.1.0_stable_2026-10-29-ls319@sha256:db8a6ca2f2b5f8767cfdfbce18dc9439bb0a570c91878288b62cbc8549b61c5e"

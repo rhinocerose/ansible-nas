@@ -5,13 +5,13 @@
   ansible.builtin.apt:
     name: python3-docker
     state: present
-  register: result
-  until: result is succeeded
+  register: ansible_nas_docker_pip_result
+  until: ansible_nas_docker_pip_result is succeeded
 
 - name: Create Docker home directory
   ansible.builtin.file:
     path: "{{ docker_home }}"
-    mode: 0755
+    mode: "0755"
     state: directory
 
 - name: Add user account to Docker group
@@ -24,10 +24,10 @@
   ansible.builtin.copy:
     dest: /etc/docker/daemon.json
     content: "{{ docker_daemon_json | to_nice_json }}"
-  register: docker_config
+  register: ansible_nas_docker_daemon_config
 
 - name: Restart Docker # noqa no-handler
   ansible.builtin.service:
     name: docker
     state: restarted
-  when: docker_config.changed
+  when: ansible_nas_docker_daemon_config.changed

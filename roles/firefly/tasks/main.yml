@@ -13,6 +13,7 @@
     - name: Create Firefly network
       community.docker.docker_network:
         name: "{{ firefly_network_name }}"
+      register: firefly_network_result
 
     - name: Create MySQL container for Firefly
       community.docker.docker_container:
@@ -31,6 +32,7 @@
           MYSQL_ROOT_PASSWORD: "{{ firefly_db_root_password }}"
         restart_policy: unless-stopped
         memory: "{{ firefly_mysql_memory }}"
+      when: not (ansible_check_mode and firefly_network_result is changed) # network only exists after a real run
 
     - name: Wait for MySQL to init
       ansible.builtin.pause:
@@ -69,6 +71,7 @@
           traefik.http.routers.firefly.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.firefly.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.firefly.loadbalancer.server.port: "8080"
+      when: not (ansible_check_mode and firefly_network_result is changed) # network only exists after a real run
   when: firefly_enabled is true
 
 - name: Stop Firefly

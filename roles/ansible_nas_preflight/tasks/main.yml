@@ -1,0 +1,47 @@
+---
+# Stops the run before anything is deployed if an enabled app still has a placeholder secret.
+# Values are read with lookup('vars', ...) and a default, because another role's defaults may not
+# be visible from here. Secret values are never printed; only variable names are reported.
+
+- name: Check enabled apps for placeholder secrets
+  ansible.builtin.assert:
+    that:
+      - _preflight_raw != _preflight_undefined
+      - _preflight_values | select('in', _preflight_bad) | list | length == 0
+    quiet: true
+    fail_msg: "{{ _preflight_name }} is undefined, empty or still a placeholder"
+  vars:
+    _preflight_undefined: "__ansible_nas_undefined__"
+    _preflight_name: "{{ item.secret_var ~ ('.' ~ item.key if item.key is defined else '') }}"
+    _preflight_raw: "{{ lookup('vars', item.secret_var, default=_preflight_undefined) }}"
+    # The secret value(s) to test: one for plain/dict entries, one per element for list entries.
+    _preflight_values: >-
+      {{ []
+         if _preflight_raw == _preflight_undefined else
+         ([_preflight_raw[item.key]] if (_preflight_raw is mapping and item.key in _preflight_raw) else [])
+         if item.key is defined else
+         (_preflight_raw | map(attribute=item.list_attr, default='') | list)
+         if item.list_attr is defined else
+         [_preflight_raw] }}
+    _preflight_bad: "{{ [item.placeholder, ''] + ansible_nas_preflight_generic_placeholders }}"
+  loop: "{{ ansible_nas_preflight_secrets }}"
+  loop_control:
+    label: "{{ _preflight_name }}"
+  when:
+    - lookup('vars', item.enabled_var, default=false) | bool
+    - _preflight_name not in ansible_nas_allowed_placeholder_secrets | default([])
+  register: ansible_nas_preflight_results
+  ignore_errors: true
+
+- name: Fail if any enabled app still has a placeholder secret
+  ansible.builtin.fail:
+    msg: >-
+      These secrets are undefined, empty or still set to a placeholder:
+      {% for i in _preflight_failed %}{{ i.secret_var }}{{ ('.' ~ i.key) if i.key is defined else '' }}{{ ', ' if not loop.last else '' }}{% endfor %}.
+      Set real values (in your vault), or add the names to ansible_nas_allowed_placeholder_secrets
+      in your inventory if you really mean to keep them.
+  vars:
+    _preflight_failed: >-
+      {{ ansible_nas_preflight_results.results | selectattr('failed', 'defined') | selectattr('failed')
+         | map(attribute='item') | list }}
+  when: _preflight_failed | length > 0

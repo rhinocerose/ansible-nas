@@ -172,6 +172,11 @@ samba_shares:
     browseable: yes
     path: "{{ code_root }}"
 
+# NFS exports the same folders as samba_shares above. Clients and options apply to every export;
+# only hosts on the home LAN (192.168.0.0/24) can mount them.
+nfs_export_clients_and_options: "192.168.0.0/24(rw,sync,no_subtree_check,no_root_squash)"
+nfs_exports: "{{ samba_shares | map(attribute='path') | map('regex_replace', '$', ' ' ~ nfs_export_clients_and_options) | list }}"
+
 ## Enable some applications
 portainer_enabled: true
 organizr_enabled: true

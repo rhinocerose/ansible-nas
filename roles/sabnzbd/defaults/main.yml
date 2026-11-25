@@ -21,4 +21,4 @@ sabnzbd_group_id: "0"
 # docker
 sabnzbd_container_name: "sabnzbd"
 sabnzbd_image_name: "linuxserver/sabnzbd"
-sabnzbd_image_version: "latest"
+sabnzbd_image_version: "5.1.3-ls282@sha256:d225bbab93f54784c115a3b1d89711e469b1969c9f32aa6ebb11fb03b5804431"

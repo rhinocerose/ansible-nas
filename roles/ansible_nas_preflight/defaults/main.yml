@@ -1,0 +1,57 @@
+---
+# Secrets that must not be left at their shipped placeholder values.
+#
+# Each entry:
+#   enabled_var: the app's *_enabled variable; the entry is only checked when it is true
+#   secret_var:  the variable holding the secret
+#   key:         (optional) for dict variables, the key inside secret_var that holds the secret.
+#                A missing key is not an error (e.g. Traefik with a non-Cloudflare DNS provider).
+#   list_attr:   (optional) for list-of-dict variables, the attribute holding the secret in each element
+#   placeholder: the value the role ships with
+#
+# The check fails when an enabled app's secret is undefined, empty, its placeholder, or one of
+# ansible_nas_preflight_generic_placeholders. To exempt one, add its name (secret_var, or
+# secret_var.key for dict entries) to ansible_nas_allowed_placeholder_secrets.
+ansible_nas_preflight_secrets:
+  - { enabled_var: bitwarden_enabled, secret_var: bitwarden_admin_token, placeholder: "qwertyuiop1234567890poiuytrewq0987654321" }
+  - { enabled_var: drone_ci_enabled, secret_var: drone_ci_agent_secret, placeholder: "d052ab29a86a02c6b6ff1e5851ee15e1" }
+  - enabled_var: woodpecker_ci_enabled
+    secret_var: woodpecker_ci_agent_secret
+    placeholder: "9f3aeaa7bbabcf42b724f65d4acb38456899ca32511677a8c3837869621c3798"
+  - { enabled_var: joomla_enabled, secret_var: joomla_database_password, placeholder: "top_secret" }
+  - { enabled_var: mumble_enabled, secret_var: mumble_server_password, placeholder: "abcpassword123" }
+  - { enabled_var: znc_enabled, secret_var: znc_user_password, placeholder: "password" }
+  - { enabled_var: krusader_enabled, secret_var: krusader_vnc_password, placeholder: "topsecret" }
+  - { enabled_var: timemachine_enabled, secret_var: timemachine_password, placeholder: "timemachine" }
+  - { enabled_var: n8n_enabled, secret_var: n8n_basic_auth_password, placeholder: "n8n_change_me" }
+  - { enabled_var: transmission_with_openvpn_enabled, secret_var: openvpn_password, placeholder: "secretpassword" }
+  - { enabled_var: piwigo_enabled, secret_var: piwigo_mysql_password, placeholder: "piwigo" }
+  - { enabled_var: piwigo_enabled, secret_var: piwigo_mysql_root_password, placeholder: "piwigo" }
+  - { enabled_var: miniflux_enabled, secret_var: miniflux_admin_password, placeholder: "supersecure" }
+  - { enabled_var: miniflux_enabled, secret_var: miniflux_db_password, placeholder: "supersecure" }
+  - { enabled_var: firefly_enabled, secret_var: firefly_db_password, placeholder: "firefly" }
+  - { enabled_var: firefly_enabled, secret_var: firefly_db_root_password, placeholder: "firefly" }
+  - { enabled_var: firefly_enabled, secret_var: firefly_app_key, placeholder: "S0m3R@nd0mString0f32Ch@rsEx@ct1y" }
+  - { enabled_var: gitea_enabled, secret_var: gitea_db_password, placeholder: "gitea" }
+  - { enabled_var: gitea_enabled, secret_var: gitea_db_root_password, placeholder: "gitea" }
+  - { enabled_var: bookstack_enabled, secret_var: bookstack_db_password, placeholder: "bookstack-pass" }
+  - { enabled_var: bookstack_enabled, secret_var: bookstack_db_root_password, placeholder: "bookstack-root-pass" }
+  - { enabled_var: partdb_enabled, secret_var: partdb_db_password, placeholder: "partdb-pass" }
+  - { enabled_var: partdb_enabled, secret_var: partdb_db_root_password, placeholder: "partdb-root-pass" }
+  - { enabled_var: nextcloud_enabled, secret_var: nextcloud_sql_password, placeholder: "nextcloud-pass" }
+  - { enabled_var: nextcloud_enabled, secret_var: nextcloud_sql_root_password, placeholder: "nextcloud-secret" }
+  - { enabled_var: paperless_ng_enabled, secret_var: paperless_ng_postgres_password, placeholder: "paperless" }
+  - { enabled_var: cloudflare_ddns_enabled, secret_var: cloudflare_ddns_token, placeholder: "abcdabcdabcd123412341234" }
+  - enabled_var: traefik_enabled
+    secret_var: traefik_environment_variables
+    key: CF_DNS_API_TOKEN
+    placeholder: "abcdabcd123412341234"
+  - enabled_var: virtual_desktop_enabled
+    secret_var: virtual_desktop_users
+    list_attr: password
+    placeholder: "topsecret"
+
+# Values that are never acceptable for any secret above (copied unchanged from vault.yml.example).
+ansible_nas_preflight_generic_placeholders:
+  - "CHANGE_ME"
+  - "CHANGE_ME_TO_32_CHARACTERS_XXXXX"

@@ -17,6 +17,7 @@
     - name: Create paperless_ng network
       community.docker.docker_network:
         name: "{{ paperless_ng_network_name }}"
+      register: paperless_ng_network_result
 
     - name: Create paperless_ng redis broker
       community.docker.docker_container:
@@ -28,6 +29,7 @@
         networks:
           - name: "{{ paperless_ng_network_name }}"
         network_mode: "{{ paperless_ng_network_name }}"
+      when: not (ansible_check_mode and paperless_ng_network_result is changed) # network only exists after a real run
 
     - name: Create paperless_ng postgres Docker Container
       community.docker.docker_container:
@@ -45,6 +47,7 @@
         networks:
           - name: "{{ paperless_ng_network_name }}"
         network_mode: "{{ paperless_ng_network_name }}"
+      when: not (ansible_check_mode and paperless_ng_network_result is changed) # network only exists after a real run
 
     - name: Create paperless_ng UI Docker Container
       community.docker.docker_container:
@@ -76,6 +79,7 @@
           traefik.http.routers.paperless_ng.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.paperless_ng.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.paperless_ng.loadbalancer.server.port: "8080"
+      when: not (ansible_check_mode and paperless_ng_network_result is changed) # network only exists after a real run
   when: paperless_ng_enabled is true
 
 - name: Stop paperless_ng

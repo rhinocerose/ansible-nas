@@ -13,6 +13,7 @@
     - name: Create Immich network
       community.docker.docker_network:
         name: "{{ immich_network_name }}"
+      register: immich_network_result
 
     - name: Create Immich Redis container
       community.docker.docker_container:
@@ -24,6 +25,7 @@
         network_mode: "{{ immich_network_name }}"
         restart_policy: unless-stopped
         memory: "{{ immich_redis_memory }}"
+      when: not (ansible_check_mode and immich_network_result is changed) # network only exists after a real run
 
     - name: Create Immich PostgreSQL container
       community.docker.docker_container:
@@ -43,6 +45,7 @@
           TZ: "{{ ansible_nas_timezone }}"
         restart_policy: unless-stopped
         memory: "{{ immich_db_memory }}"
+      when: not (ansible_check_mode and immich_network_result is changed) # network only exists after a real run
 
     - name: Create Immich machine learning container
       community.docker.docker_container:
@@ -60,6 +63,7 @@
           TZ: "{{ ansible_nas_timezone }}"
         restart_policy: unless-stopped
         memory: "{{ immich_machine_learning_memory }}"
+      when: not (ansible_check_mode and immich_network_result is changed) # network only exists after a real run
 
     - name: Create Immich server container
       community.docker.docker_container:
@@ -93,6 +97,7 @@
           traefik.http.routers.immich.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.immich.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.immich.loadbalancer.server.port: "2283"
+      when: not (ansible_check_mode and immich_network_result is changed) # network only exists after a real run
   when: immich_enabled is true
 
 - name: Stop Immich

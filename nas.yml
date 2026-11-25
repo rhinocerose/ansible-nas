@@ -6,6 +6,11 @@
     ###
     ### Requirements
     ###
+    - role: ansible_nas_preflight
+      tags:
+        - always
+        - ansible-nas-preflight
+
     - role: ansible_nas_users
       tags:
         - ansible-nas-users

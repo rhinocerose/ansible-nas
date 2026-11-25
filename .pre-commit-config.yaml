@@ -1,17 +1,21 @@
 ---
 repos:
-  - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v6.14.6
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v26.11.0
     hooks:
       - id: ansible-lint
+        # The hook asks for python3.14; any Python >= 3.11 works (needed by ansible-core >= 2.19).
+        language_version: python3
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.30.0
+    rev: v1.38.0
     hooks:
       - id: yamllint
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.32.2
+    rev: v0.50.0
     hooks:
       - id: markdownlint
+        # Explicit Node version: older nodeenv releases fail to look up the "latest" one.
+        language_version: 24.22.1
   - repo: local
     hooks:
       - id: vault-encrypted

@@ -13,7 +13,7 @@ organizr_hostname: "organizr"
 # docker
 organizr_container_name: "organizr"
 organizr_image_name: "organizr/organizr"
-organizr_image_version: "latest"
+organizr_image_version: "latest@sha256:52183b1eeb25632e68b677adafbcbaa5436d62cbbbe049edd4fcfa527baa0b1d"
 organizr_user_id: "1000"
 organizr_group_id: "1000"
 

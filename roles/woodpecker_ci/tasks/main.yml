@@ -77,6 +77,9 @@
   block:
     - name: Stop Woodpecker-CI
       community.docker.docker_container:
-        name: "{{ woodpecker_ci_container_name }}"
+        name: "{{ item }}"
         state: absent
+      loop:
+        - "{{ woodpecker_ci_container_name }}"
+        - "{{ woodpecker_ci_agent_container_name }}"
   when: woodpecker_ci_enabled is false

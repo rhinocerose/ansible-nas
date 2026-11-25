@@ -13,6 +13,7 @@
     - name: Create Piwigo network
       community.docker.docker_network:
         name: "{{ piwigo_network_name }}"
+      register: piwigo_network_result
 
     - name: Create MySQL container for Piwigo
       community.docker.docker_container:
@@ -31,6 +32,7 @@
         networks:
           - name: "{{ piwigo_network_name }}"
         network_mode: "{{ piwigo_network_name }}"
+      when: not (ansible_check_mode and piwigo_network_result is changed) # network only exists after a real run
 
     - name: Piwigo Docker Container
       community.docker.docker_container:
@@ -59,6 +61,7 @@
           traefik.http.routers.piwigo.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.piwigo.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.piwigo.loadbalancer.server.port: "80"
+      when: not (ansible_check_mode and piwigo_network_result is changed) # network only exists after a real run
   when: piwigo_enabled is true
 
 - name: Stop Piwigo

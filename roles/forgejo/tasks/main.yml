@@ -12,6 +12,7 @@
     - name: Create Forgejo network
       community.docker.docker_network:
         name: "{{ forgejo_network_name }}"
+      register: forgejo_network_result
 
     - name: Create PostgreSQL container for Forgejo
       community.docker.docker_container:
@@ -29,6 +30,7 @@
           POSTGRES_PASSWORD: "{{ forgejo_db_password }}"
         restart_policy: unless-stopped
         memory: "{{ forgejo_db_memory }}"
+      when: not (ansible_check_mode and forgejo_network_result is changed) # network only exists after a real run
 
     - name: Create Forgejo container
       community.docker.docker_container:
@@ -64,6 +66,7 @@
           traefik.http.routers.forgejo.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.forgejo.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.forgejo.loadbalancer.server.port: "3000"
+      when: not (ansible_check_mode and forgejo_network_result is changed) # network only exists after a real run
   when: forgejo_enabled is true
 
 - name: Stop Forgejo

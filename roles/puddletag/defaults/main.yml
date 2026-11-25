@@ -14,7 +14,7 @@ puddletag_hostname: "puddletag"
 # docker
 puddletag_container_name: "puddletag"
 puddletag_image_name: "xirg/docker-puddletag"
-puddletag_image_version: "latest"
+puddletag_image_version: "latest@sha256:198a5e96219d6cdf65b4ec565c8e0d4f32cce8e0fe26a82c5501590de85c4483"
 
 # specs
 puddletag_memory: 1g

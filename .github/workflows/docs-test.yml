@@ -7,16 +7,6 @@ on:
       - main
 
 jobs:
-  lint:
-    name: Lint Docs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Lint docs
-        uses: articulate/actions-markdownlint@v1
-        with:
-          version: 0.32.2
-
   test-deploy:
     name: Test deployment
     runs-on: ubuntu-latest
@@ -24,8 +14,8 @@ jobs:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 18
           cache: npm

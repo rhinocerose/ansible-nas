@@ -24,3 +24,7 @@ deluge_timezone: "{{ ansible_nas_timezone }}"
 deluge_memory: 1g
 
 deluge_container_name: deluge
+
+# image (pinned to the image running on the NAS; set to "latest" to follow upstream)
+deluge_image_name: "linuxserver/deluge"
+deluge_image_version: "2.2.0-ls388@sha256:52314116ba684ae5cdcbd380758be2a5f7cc866b4235f44ba7af8ff7c35c42b7"

@@ -67,4 +67,26 @@
       community.docker.docker_container:
         name: "{{ tandoor_container_name }}"
         state: absent
+
+    # Tandoor's DB and NGINX containers have generic names ("postgres", "nginx") that another app
+    # could also use, so only remove them if they mount Tandoor's config directory.
+    - name: Get Tandoor DB and NGINX container info
+      community.docker.docker_container_info:
+        name: "{{ item }}"
+      loop:
+        - postgres
+        - nginx
+      register: tandoor_helper_containers
+
+    - name: Stop Tandoor DB and NGINX containers
+      community.docker.docker_container:
+        name: "{{ item.item }}"
+        state: absent
+      loop: "{{ tandoor_helper_containers.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+      when:
+        - item.exists
+        - item.container.Mounts | default([]) | map(attribute='Source')
+          | select('match', '^' ~ (tandoor_config_directory | regex_escape) ~ '/') | list | length > 0
   when: tandoor_enabled is false

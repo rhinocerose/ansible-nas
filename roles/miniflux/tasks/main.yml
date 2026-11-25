@@ -11,6 +11,7 @@
     - name: Create Miniflux network
       community.docker.docker_network:
         name: "{{ miniflux_network_name }}"
+      register: miniflux_network_result
 
     - name: Create Postgres for Miniflux
       community.docker.docker_container:
@@ -27,6 +28,7 @@
           POSTGRES_PASSWORD: "{{ miniflux_db_password }}"
         restart_policy: unless-stopped
         memory: "{{ miniflux_postgres_memory }}"
+      when: not (ansible_check_mode and miniflux_network_result is changed) # network only exists after a real run
 
     - name: Create Miniflux Docker Container
       community.docker.docker_container:
@@ -53,12 +55,16 @@
           traefik.http.routers.miniflux.tls.domains[0].main: "{{ ansible_nas_domain }}"
           traefik.http.routers.miniflux.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
           traefik.http.services.miniflux.loadbalancer.server.port: "8080"
+      when: not (ansible_check_mode and miniflux_network_result is changed) # network only exists after a real run
   when: miniflux_enabled is true
 
 - name: Stop Miniflux
   block:
     - name: Stop Miniflux
       community.docker.docker_container:
-        name: "{{ miniflux_container_name }}"
+        name: "{{ item }}"
         state: absent
+      loop:
+        - "{{ miniflux_container_name }}"
+        - "{{ miniflux_db_container_name }}"
   when: miniflux_enabled is false

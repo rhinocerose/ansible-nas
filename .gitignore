@@ -4,6 +4,8 @@ site
 *.retry
 *.log
 .cache
+# ansible-lint's cache of Galaxy roles and collections
+.ansible/
 roles/bertvv.samba
 roles/geerlingguy.docker
 roles/geerlingguy.nfs

@@ -4,6 +4,9 @@ skip_list:
  - name[missing]
  - key-order[task]
  - name[template]
+ # Many role variables are user-facing without the role prefix (docker_home, openvpn_password,
+ # speedtest_*, transmission_openvpn_*, ...). Renaming them would break existing inventories.
+ - var-naming[no-role-prefix]
 
 exclude_paths:
  - roles/bertvv.samba

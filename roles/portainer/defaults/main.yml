@@ -12,7 +12,7 @@ portainer_hostname: "portainer"
 # docker
 portainer_container_name: "portainer"
 portainer_image_name: "portainer/portainer-ce"
-portainer_image_version: "latest"
+portainer_image_version: "latest@sha256:18616fff2998f8ca0e8ebe7f028658ae1682859cf43f212f81a849c1093ad639"
 
 # specs
 portainer_memory: 1g

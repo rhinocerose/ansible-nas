@@ -8,8 +8,8 @@
   ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: 3600
-  register: result
-  until: result is succeeded
+  register: ansible_nas_general_apt_result
+  until: ansible_nas_general_apt_result is succeeded
 
 - name: Upgrade all packages # noqa package-latest
   ansible.builtin.apt:
@@ -23,8 +23,8 @@
   ansible.builtin.apt:
     name: "{{ ansible_nas_extra_packages }}"
     state: present
-  register: result
-  until: result is succeeded
+  register: ansible_nas_general_apt_result
+  until: ansible_nas_general_apt_result is succeeded
 
 #  - name: Configure smartmontools
 
