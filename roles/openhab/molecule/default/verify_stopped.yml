@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ openhab_container_name }}"
         state: absent
-      register: result
+      register: openhab_result
 
     - name: Check if openhab is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not openhab_result.changed

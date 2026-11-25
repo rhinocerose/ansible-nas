@@ -9,10 +9,10 @@
     - name: Get sabnzbd container state
       community.docker.docker_container:
         name: "{{ sabnzbd_container_name }}"
-      register: result
+      register: sabnzbd_result
 
     - name: Check if sabnzbd containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - sabnzbd_result.container['State']['Status'] == "running"
+          - sabnzbd_result.container['State']['Restarting'] == false

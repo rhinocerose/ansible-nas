@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ pyload_container_name }}"
         state: absent
-      register: result
+      register: pyload_result
 
     - name: Check if pyload is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not pyload_result.changed

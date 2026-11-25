@@ -9,17 +9,17 @@
     - name: Get nextcloud db container state
       community.docker.docker_container:
         name: "{{ nextcloud_db_container_name }}"
-      register: result_db
+      register: nextcloud_result_db
 
     - name: Get nextcloud container state
       community.docker.docker_container:
         name: "{{ nextcloud_container_name }}"
-      register: result
+      register: nextcloud_result
 
     - name: Check if nextcloud containers are running
       ansible.builtin.assert:
         that:
-          - result_db.container['State']['Status'] == "running"
-          - result_db.container['State']['Restarting'] == false
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - nextcloud_result_db.container['State']['Status'] == "running"
+          - nextcloud_result_db.container['State']['Restarting'] == false
+          - nextcloud_result.container['State']['Status'] == "running"
+          - nextcloud_result.container['State']['Restarting'] == false

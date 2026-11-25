@@ -9,17 +9,17 @@
     - name: Get joomla container state
       community.docker.docker_container:
         name: "{{ joomla_container_name }}"
-      register: result
+      register: joomla_result
 
     - name: Get joomla db container state
       community.docker.docker_container:
         name: "{{ joomla_db_container_name }}"
-      register: result_db
+      register: joomla_result_db
 
     - name: Check if joomla containers are running
       ansible.builtin.assert:
         that:
-          - result_db.container['State']['Status'] == "running"
-          - result_db.container['State']['Restarting'] == false
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - joomla_result_db.container['State']['Status'] == "running"
+          - joomla_result_db.container['State']['Restarting'] == false
+          - joomla_result.container['State']['Status'] == "running"
+          - joomla_result.container['State']['Restarting'] == false

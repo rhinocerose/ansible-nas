@@ -1,0 +1,119 @@
+---
+- name: Start Immich
+  block:
+    - name: Create Immich Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ immich_upload_directory }}"
+        - "{{ immich_postgres_directory }}"
+        - "{{ immich_model_cache_directory }}"
+
+    - name: Create Immich network
+      community.docker.docker_network:
+        name: "{{ immich_network_name }}"
+
+    - name: Create Immich Redis container
+      community.docker.docker_container:
+        name: "{{ immich_redis_container_name }}"
+        image: "{{ immich_redis_image_name }}:{{ immich_redis_image_version }}"
+        pull: true
+        networks:
+          - name: "{{ immich_network_name }}"
+        network_mode: "{{ immich_network_name }}"
+        restart_policy: unless-stopped
+        memory: "{{ immich_redis_memory }}"
+
+    - name: Create Immich PostgreSQL container
+      community.docker.docker_container:
+        name: "{{ immich_db_container_name }}"
+        image: "{{ immich_db_image_name }}:{{ immich_db_image_version }}"
+        pull: true
+        networks:
+          - name: "{{ immich_network_name }}"
+        network_mode: "{{ immich_network_name }}"
+        volumes:
+          - "{{ immich_postgres_directory }}:/var/lib/postgresql/data:rw"
+        env:
+          POSTGRES_PASSWORD: "{{ immich_db_password }}"
+          POSTGRES_USER: "{{ immich_db_user }}"
+          POSTGRES_DB: "{{ immich_db_name }}"
+          POSTGRES_INITDB_ARGS: "--data-checksums"
+          TZ: "{{ ansible_nas_timezone }}"
+        restart_policy: unless-stopped
+        memory: "{{ immich_db_memory }}"
+
+    - name: Create Immich machine learning container
+      community.docker.docker_container:
+        name: "{{ immich_machine_learning_container_name }}"
+        image: "{{ immich_machine_learning_image_name }}:{{ immich_machine_learning_image_version }}"
+        pull: true
+        networks:
+          - name: "{{ immich_network_name }}"
+        network_mode: "{{ immich_network_name }}"
+        volumes:
+          - "{{ immich_model_cache_directory }}:/cache:rw"
+        env:
+          IMMICH_VERSION: "{{ immich_machine_learning_image_version }}"
+          MACHINE_LEARNING_MODEL_REVISION: "v2"
+          TZ: "{{ ansible_nas_timezone }}"
+        restart_policy: unless-stopped
+        memory: "{{ immich_machine_learning_memory }}"
+
+    - name: Create Immich server container
+      community.docker.docker_container:
+        name: "{{ immich_server_container_name }}"
+        image: "{{ immich_server_image_name }}:{{ immich_server_image_version }}"
+        pull: true
+        networks:
+          - name: "{{ immich_network_name }}"
+        network_mode: "{{ immich_network_name }}"
+        volumes:
+          - "{{ immich_upload_directory }}:/data:rw"
+          - "/etc/localtime:/etc/localtime:ro"
+        ports:
+          - "{{ immich_port }}:2283"
+        env:
+          IMMICH_VERSION: "{{ immich_server_image_version }}"
+          DB_HOSTNAME: "{{ immich_db_container_name }}"
+          DB_PORT: "5432"
+          DB_USERNAME: "{{ immich_db_user }}"
+          DB_PASSWORD: "{{ immich_db_password }}"
+          DB_DATABASE_NAME: "{{ immich_db_name }}"
+          REDIS_HOSTNAME: "{{ immich_redis_container_name }}"
+          REDIS_PORT: "6379"
+          TZ: "{{ ansible_nas_timezone }}"
+        restart_policy: unless-stopped
+        memory: "{{ immich_server_memory }}"
+        labels:
+          traefik.enable: "{{ immich_available_externally | string }}"
+          traefik.http.routers.immich.rule: "Host(`{{ immich_hostname }}.{{ ansible_nas_domain }}`)"
+          traefik.http.routers.immich.tls.certresolver: "letsencrypt"
+          traefik.http.routers.immich.tls.domains[0].main: "{{ ansible_nas_domain }}"
+          traefik.http.routers.immich.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+          traefik.http.services.immich.loadbalancer.server.port: "2283"
+  when: immich_enabled is true
+
+- name: Stop Immich
+  block:
+    - name: Stop Immich server
+      community.docker.docker_container:
+        name: "{{ immich_server_container_name }}"
+        state: absent
+
+    - name: Stop Immich machine learning
+      community.docker.docker_container:
+        name: "{{ immich_machine_learning_container_name }}"
+        state: absent
+
+    - name: Stop Immich PostgreSQL
+      community.docker.docker_container:
+        name: "{{ immich_db_container_name }}"
+        state: absent
+
+    - name: Stop Immich Redis
+      community.docker.docker_container:
+        name: "{{ immich_redis_container_name }}"
+        state: absent
+  when: immich_enabled is false

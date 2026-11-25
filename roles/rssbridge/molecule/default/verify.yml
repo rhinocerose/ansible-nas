@@ -9,10 +9,10 @@
     - name: Get rssbridge container state
       community.docker.docker_container:
         name: "{{ rssbridge_container_name }}"
-      register: result
+      register: rssbridge_result
 
     - name: Check if rssbridge containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - rssbridge_result.container['State']['Status'] == "running"
+          - rssbridge_result.container['State']['Restarting'] == false

@@ -9,10 +9,10 @@
     - name: Get watchtower container state
       community.docker.docker_container:
         name: "{{ watchtower_container_name }}"
-      register: result
+      register: watchtower_result
 
     - name: Check if watchtower containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - watchtower_result.container['State']['Status'] == "running"
+          - watchtower_result.container['State']['Restarting'] == false

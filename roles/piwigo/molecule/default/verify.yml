@@ -9,17 +9,17 @@
     - name: Get piwigo db container state
       community.docker.docker_container:
         name: "{{ piwigo_db_container_name }}"
-      register: result_db
+      register: piwigo_result_db
 
     - name: Get piwigo container state
       community.docker.docker_container:
         name: "{{ piwigo_container_name }}"
-      register: result
+      register: piwigo_result
 
     - name: Check if piwigo containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
-          - result_db.container['State']['Status'] == "running"
-          - result_db.container['State']['Restarting'] == false
+          - piwigo_result.container['State']['Status'] == "running"
+          - piwigo_result.container['State']['Restarting'] == false
+          - piwigo_result_db.container['State']['Status'] == "running"
+          - piwigo_result_db.container['State']['Restarting'] == false

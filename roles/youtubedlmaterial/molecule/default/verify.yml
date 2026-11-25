@@ -9,10 +9,10 @@
     - name: Get youtubedlmaterial container state
       community.docker.docker_container:
         name: "{{ youtubedlmaterial_container_name }}"
-      register: result
+      register: youtubedlmaterial_result
 
     - name: Check if youtubedlmaterial containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - youtubedlmaterial_result.container['State']['Status'] == "running"
+          - youtubedlmaterial_result.container['State']['Restarting'] == false

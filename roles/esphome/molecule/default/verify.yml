@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ esphome_container_name }}"
-      register: result
+      register: esphome_result
 
     - name: Check EspHome is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - esphome_result.container['State']['Status'] == "running"
+          - esphome_result.container['State']['Restarting'] == false

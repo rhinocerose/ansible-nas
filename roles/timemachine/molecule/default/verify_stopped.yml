@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ timemachine_container_name }}"
         state: absent
-      register: result
+      register: timemachine_result
 
     - name: Check if timemachine is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not timemachine_result.changed

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ sickchill_container_name }}"
         state: absent
-      register: result
+      register: sickchill_result
 
     - name: Check if sickchill is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not sickchill_result.changed

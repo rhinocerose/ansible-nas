@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ transmission_container_name }}"
         state: absent
-      register: result
+      register: transmission_result
 
     - name: Check if transmission is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not transmission_result.changed

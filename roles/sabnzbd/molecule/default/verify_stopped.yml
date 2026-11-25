@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ sabnzbd_container_name }}"
         state: absent
-      register: result
+      register: sabnzbd_result
 
     - name: Check if sabnzbd is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not sabnzbd_result.changed

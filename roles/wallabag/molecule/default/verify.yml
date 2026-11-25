@@ -9,10 +9,10 @@
     - name: Get wallabag container state
       community.docker.docker_container:
         name: "{{ wallabag_container_name }}"
-      register: result
+      register: wallabag_result
 
     - name: Check if wallabag containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - wallabag_result.container['State']['Status'] == "running"
+          - wallabag_result.container['State']['Restarting'] == false

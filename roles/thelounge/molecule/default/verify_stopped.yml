@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ thelounge_container_name }}"
         state: absent
-      register: result
+      register: thelounge_result
 
     - name: Check if thelounge is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not thelounge_result.changed

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ nzbget_container_name }}"
         state: absent
-      register: result
+      register: nzbget_result
 
     - name: Check if nzbget is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not nzbget_result.changed

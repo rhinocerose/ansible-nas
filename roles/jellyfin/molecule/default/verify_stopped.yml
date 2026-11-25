@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ jellyfin_container_name }}"
         state: absent
-      register: result
+      register: jellyfin_result
 
     - name: Check if jellyfin is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not jellyfin_result.changed

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ virtual_desktop_container_name }}"
         state: absent
-      register: result
+      register: virtual_desktop_result
 
     - name: Check if virtual_desktop is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not virtual_desktop_result.changed

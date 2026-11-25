@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ octoprint_container_name }}"
         state: absent
-      register: result
+      register: octoprint_result
 
     - name: Check if octoprint is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not octoprint_result.changed

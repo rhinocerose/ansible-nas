@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ couchpotato_container_name }}"
         state: absent
-      register: result
+      register: couchpotato_result
 
     - name: Check Couchpotato is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not couchpotato_result.changed

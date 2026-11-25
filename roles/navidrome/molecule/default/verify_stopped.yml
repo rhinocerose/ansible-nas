@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ navidrome_container_name }}"
         state: absent
-      register: result
+      register: navidrome_result
 
     - name: Check if navidrome is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not navidrome_result.changed

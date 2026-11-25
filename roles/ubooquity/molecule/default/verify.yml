@@ -9,10 +9,10 @@
     - name: Get ubooquity container state
       community.docker.docker_container:
         name: "{{ ubooquity_container_name }}"
-      register: result
+      register: ubooquity_result
 
     - name: Check if ubooquity containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - ubooquity_result.container['State']['Status'] == "running"
+          - ubooquity_result.container['State']['Restarting'] == false

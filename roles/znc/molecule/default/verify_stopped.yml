@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ znc_container_name }}"
         state: absent
-      register: result
+      register: znc_result
 
     - name: Check if znc is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not znc_result.changed

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ sonarr_container_name }}"
         state: absent
-      register: result
+      register: sonarr_result
 
     - name: Check if sonarr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not sonarr_result.changed

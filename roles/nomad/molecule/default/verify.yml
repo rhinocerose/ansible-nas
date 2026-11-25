@@ -10,11 +10,11 @@
       ansible.builtin.systemd:
         name: "{{ nomad_service_name }}"
         state: started
-      register: service_result
+      register: nomad_service_result
 
     - name: Check that Nomad service is running
       ansible.builtin.assert:
         that:
-          - service_result.status['ActiveState'] == "active"
-          - service_result.status['Result'] == "success"
-          - service_result.state == "started"
+          - nomad_service_result.status['ActiveState'] == "active"
+          - nomad_service_result.status['Result'] == "success"
+          - nomad_service_result.state == "started"

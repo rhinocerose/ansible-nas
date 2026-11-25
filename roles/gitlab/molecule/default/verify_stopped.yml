@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ gitlab_container_name }}"
         state: absent
-      register: result
+      register: gitlab_result
 
     - name: Check if gitlab is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not gitlab_result.changed

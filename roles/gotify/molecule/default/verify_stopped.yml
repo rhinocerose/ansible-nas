@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ gotify_container_name }}"
         state: absent
-      register: result
+      register: gotify_result
 
     - name: Check if gotify is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not gotify_result.changed

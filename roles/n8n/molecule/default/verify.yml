@@ -9,10 +9,10 @@
     - name: Get n8n container state
       community.docker.docker_container:
         name: "{{ n8n_container_name }}"
-      register: result
+      register: n8n_result
 
     - name: Check if n8n containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - n8n_result.container['State']['Status'] == "running"
+          - n8n_result.container['State']['Restarting'] == false

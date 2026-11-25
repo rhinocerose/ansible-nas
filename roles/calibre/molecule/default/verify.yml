@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ calibre_container_name }}"
-      register: result
+      register: calibre_result
 
     - name: Check Calibre is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - calibre_result.container['State']['Status'] == "running"
+          - calibre_result.container['State']['Restarting'] == false

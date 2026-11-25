@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ homebridge_container_name }}"
         state: absent
-      register: result
+      register: homebridge_result
 
     - name: Check if homebridge is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not homebridge_result.changed

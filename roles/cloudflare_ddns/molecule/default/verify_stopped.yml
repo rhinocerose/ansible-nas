@@ -8,11 +8,11 @@
 
     - name: Try and stop and remove Cloudflare DDNS
       community.docker.docker_container:
-        name: "{{ cloudflare_container_name }}"
+        name: "{{ cloudflare_ddns_container_name }}"
         state: absent
-      register: result
+      register: cloudflare_ddns_result
 
     - name: Check Cloudflare DDNS is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not cloudflare_ddns_result.changed

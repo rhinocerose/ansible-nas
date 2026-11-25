@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ jellyseerr_container_name }}"
         state: absent
-      register: result
+      register: jellyseerr_result
 
     - name: Check if jellyseerr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not jellyseerr_result.changed

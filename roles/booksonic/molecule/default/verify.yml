@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ booksonic_container_name }}"
-      register: result
+      register: booksonic_result
 
     - name: Check Booksonic is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - booksonic_result.container['State']['Status'] == "running"
+          - booksonic_result.container['State']['Restarting'] == false

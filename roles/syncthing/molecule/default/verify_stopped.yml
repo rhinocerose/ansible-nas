@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ syncthing_container_name }}"
         state: absent
-      register: result
+      register: syncthing_result
 
     - name: Check if syncthing is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not syncthing_result.changed

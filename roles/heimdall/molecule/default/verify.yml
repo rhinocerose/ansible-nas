@@ -11,10 +11,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ heimdall_container_name }}"
-      register: result
+      register: heimdall_result
 
     - name: Check Heimdall is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - heimdall_result.container['State']['Status'] == "running"
+          - heimdall_result.container['State']['Restarting'] == false

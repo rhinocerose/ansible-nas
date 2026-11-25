@@ -33,6 +33,7 @@ If you have a spare domain name you can configure applications to be accessible 
 * [Emby](https://emby.media/) - Media streaming and management
 * [ESPHome](https://esphome.io/) - ESP8266/ESP32 programming and management for home automation
 * [Firefly III](https://firefly-iii.org/) - Free and open source personal finance manager
+* [Forgejo](https://forgejo.org/) - Self-hosted, lightweight Git service, forked from Gitea
 * [Fresh RSS](https://freshrss.org/) - Self-hosted RSS feed aggregator like Leed or Kriss Feed
 * [get_iplayer](https://github.com/get-iplayer/get_iplayer) - download programmes from BBC iplayer
 * [Gitea](https://gitea.io/en-us/) - Simple self-hosted GitHub clone
@@ -45,6 +46,8 @@ If you have a spare domain name you can configure applications to be accessible 
 * [Heimdall](https://heimdall.site/) - Home server dashboard
 * [Home Assistant](https://www.home-assistant.io) - Open source home automation
 * [Homebridge](https://github.com/nfarina/homebridge) - Emulate the iOS HomeKit API
+* [Homer](https://github.com/bastienwirtz/homer) - A very simple static homepage for your server
+* [Immich](https://immich.app/) - Self-hosted photo and video backup solution
 * [Jackett](https://github.com/Jackett/Jackett) - API Support for your favorite torrent trackers
 * [Jellyfin](https://jellyfin.github.io) - The Free Software Media System
 * [Joomla](https://www.joomla.org/) - Open source content management system
@@ -61,6 +64,7 @@ If you have a spare domain name you can configure applications to be accessible 
 * [MyMediaForAlexa](https://www.mymediaalexa.com/) - Lets you stream your music collection to your alexa device
 * [n8n](https://n8n.io/) - Nodemation, a node based workflow and automation service like IFTTT.
 * [navidrome](https://www.navidrome.org/) - Modern Music Server and Streamer compatible with Subsonic/Airsonic
+* [NetBird](https://netbird.io/) - Self-hosted WireGuard-based VPN and zero-trust network access
 * [netboot.xyz](https://netboot.xyz/) - a PXE boot server
 * [Netdata](https://my-netdata.io/) - An extremely comprehensive system monitoring solution
 * [Nextcloud](https://nextcloud.com/) - A self-hosted Dropbox alternative
@@ -72,6 +76,7 @@ If you have a spare domain name you can configure applications to be accessible 
 * [Organizr](https://organizr.app/) - ORGANIZR aims to be your one stop shop for your Servers Frontend.
 * [overseerr](https://docs.overseerr.dev) - open source software application for managing requests for your media library
 * [Paperless_ng](https://github.com/jonaswinkler/paperless-ng) - Scan, index and archive all your physical documents
+* [Part-DB](https://part-db.de/) - Open source inventory management system for electronic components
 * [Piwigo](https://piwigo.org/) - Photo Gallery Software
 * [Plex](https://www.plex.tv/) - Plex Media Server
 * [Portainer](https://portainer.io/) - for managing Docker and running custom images

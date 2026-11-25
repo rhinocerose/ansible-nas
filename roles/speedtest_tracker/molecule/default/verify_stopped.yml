@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ speedtest_container_name }}"
         state: absent
-      register: result
+      register: speedtest_tracker_result
 
     - name: Check if speedtest is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not speedtest_tracker_result.changed

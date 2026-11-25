@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ tautulli_container_name }}"
         state: absent
-      register: result
+      register: tautulli_result
 
     - name: Check if tautulli is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not tautulli_result.changed

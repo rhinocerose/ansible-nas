@@ -9,10 +9,10 @@
     - name: Get speedtest container state
       community.docker.docker_container:
         name: "{{ speedtest_container_name }}"
-      register: result
+      register: speedtest_tracker_result
 
     - name: Check if speedtest containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - speedtest_tracker_result.container['State']['Status'] == "running"
+          - speedtest_tracker_result.container['State']['Restarting'] == false

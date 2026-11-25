@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ watchtower_container_name }}"
         state: absent
-      register: result
+      register: watchtower_result
 
     - name: Check if watchtower is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not watchtower_result.changed

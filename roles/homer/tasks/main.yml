@@ -1,0 +1,42 @@
+---
+- name: Start Homer
+  block:
+    - name: Create Homer Directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ homer_data_directory }}"
+        - "{{ homer_assets_directory }}"
+
+    - name: Homer Docker Container
+      community.docker.docker_container:
+        name: "{{ homer_container_name }}"
+        image: "{{ homer_image_name }}:{{ homer_image_version }}"
+        pull: true
+        volumes:
+          - "{{ homer_assets_directory }}:/www/assets:rw"
+        ports:
+          - "{{ homer_port }}:8080"
+        env:
+          TZ: "{{ ansible_nas_timezone }}"
+          UID: "{{ homer_user_id }}"
+          GID: "{{ homer_group_id }}"
+        restart_policy: unless-stopped
+        memory: "{{ homer_memory }}"
+        labels:
+          traefik.enable: "{{ homer_available_externally | string }}"
+          traefik.http.routers.homer.rule: "Host(`{{ homer_hostname }}.{{ ansible_nas_domain }}`)"
+          traefik.http.routers.homer.tls.certresolver: "letsencrypt"
+          traefik.http.routers.homer.tls.domains[0].main: "{{ ansible_nas_domain }}"
+          traefik.http.routers.homer.tls.domains[0].sans: "*.{{ ansible_nas_domain }}"
+          traefik.http.services.homer.loadbalancer.server.port: "8080"
+  when: homer_enabled is true
+
+- name: Stop Homer
+  block:
+    - name: Stop Homer
+      community.docker.docker_container:
+        name: "{{ homer_container_name }}"
+        state: absent
+  when: homer_enabled is false

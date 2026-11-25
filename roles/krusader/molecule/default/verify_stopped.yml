@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ krusader_container_name }}"
         state: absent
-      register: result
+      register: krusader_result
 
     - name: Check if krusader container is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not krusader_result.changed

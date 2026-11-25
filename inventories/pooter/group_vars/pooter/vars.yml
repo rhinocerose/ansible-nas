@@ -187,14 +187,14 @@ puddletag_enabled: true
 
 ## Video
 jellyfin_enabled: true
-#jellyfin_available_externally: true
+# jellyfin_available_externally: true
 
 plex_enabled: true
-#plex_available_externally: true
+# plex_available_externally: true
 tautulli_enabled: true
 
 deluge_enabled: true
-#deluge_available_externally: true
+# deluge_available_externally: true
 
 sabnzbd_enabled: true
 
@@ -270,7 +270,7 @@ paperless_ng_postgres_password: "{{ vault_paperless_ng_postgres_password }}"
 # Cloudflare - used by both cloudflare_ddns and Traefik's DNS challenge.
 # Setting traefik_environment_variables replaces the role default entirely, so add any other
 # Traefik env vars here too.
-cloudflare_token: "{{ vault_cloudflare_token }}"
+cloudflare_ddns_token: "{{ vault_cloudflare_token }}"
 traefik_environment_variables:
   CF_DNS_API_TOKEN: "{{ vault_cloudflare_token }}"
 

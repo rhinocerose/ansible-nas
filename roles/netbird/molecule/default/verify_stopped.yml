@@ -1,0 +1,25 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - ansible.builtin.include_vars:
+        file: ../../defaults/main.yml
+
+    - name: Try and stop and remove NetBird dashboard
+      community.docker.docker_container:
+        name: "{{ netbird_dashboard_container_name }}"
+        state: absent
+      register: netbird_result_dashboard
+
+    - name: Try and stop and remove NetBird server
+      community.docker.docker_container:
+        name: "{{ netbird_server_container_name }}"
+        state: absent
+      register: netbird_result_server
+
+    - name: Check if NetBird is stopped
+      ansible.builtin.assert:
+        that:
+          - not netbird_result_dashboard.changed
+          - not netbird_result_server.changed

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ bazarr_container_name }}"
         state: absent
-      register: result
+      register: bazarr_result
 
     - name: Check Bazarr is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not bazarr_result.changed

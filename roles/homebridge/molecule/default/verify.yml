@@ -9,10 +9,10 @@
     - name: Get homebridge container state
       community.docker.docker_container:
         name: "{{ homebridge_container_name }}"
-      register: result
+      register: homebridge_result
 
     - name: Check if homebridge containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - homebridge_result.container['State']['Status'] == "running"
+          - homebridge_result.container['State']['Restarting'] == false

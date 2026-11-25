@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ emby_container_name }}"
-      register: result
+      register: emby_result
 
     - name: Check Emby is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - emby_result.container['State']['Status'] == "running"
+          - emby_result.container['State']['Restarting'] == false

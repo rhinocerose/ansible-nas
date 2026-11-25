@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ emby_container_name }}"
         state: absent
-      register: result
+      register: emby_result
 
     - name: Check Emby is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not emby_result.changed

@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ esphome_container_name }}"
         state: absent
-      register: result
+      register: esphome_result
 
     - name: Check EspHome is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not esphome_result.changed

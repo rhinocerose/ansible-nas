@@ -9,10 +9,10 @@
     - name: Get freshrss container state
       community.docker.docker_container:
         name: "{{ freshrss_container_name }}"
-      register: result
+      register: freshrss_result
 
     - name: Check if freshrss containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - freshrss_result.container['State']['Status'] == "running"
+          - freshrss_result.container['State']['Restarting'] == false

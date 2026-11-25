@@ -1,0 +1,37 @@
+---
+netbird_enabled: false
+netbird_available_externally: false
+
+# directories
+netbird_config_directory: "{{ docker_home }}/netbird"
+netbird_data_directory: "{{ netbird_config_directory }}/data"
+
+# network
+netbird_hostname: "netbird"
+netbird_network_name: "netbird"
+netbird_port: "8085"
+netbird_port_server: "8086"
+netbird_port_stun: "3478"
+
+# The URL NetBird clients and the dashboard use to reach the management server.
+# External access requires a DNS record and ports 80/443 to be forwarded to Ansible-NAS.
+netbird_public_url: "{{ netbird_available_externally | bool | ternary('https://' + netbird_hostname + '.' + ansible_nas_domain, 'http://' + ansible_nas_hostname + ':' + netbird_port_server) }}"
+netbird_dashboard_url: "{{ netbird_available_externally | bool | ternary('https://' + netbird_hostname + '.' + ansible_nas_domain, 'http://' + ansible_nas_hostname + ':' + netbird_port) }}"
+
+# secrets - change these before exposing NetBird to the internet
+# DataStoreEncryptionKey must be a base64 encoded 32 byte key (openssl rand -base64 32)
+netbird_relay_auth_secret: "66dc5d92476de120f7dbf13d37b6a7c5"
+netbird_datastore_encryption_key: "LPtecJs3b+OSbwtelSbXmNRqraP2cbYYroNHtK6FH3Y="
+netbird_session_cookie_encryption_key: "dAZVqpbLbGJBleRE30R9qWgyxRmdO12g3qcKstyTHcE="
+
+# docker
+netbird_dashboard_container_name: "netbird-dashboard"
+netbird_dashboard_image_name: "netbirdio/dashboard"
+netbird_dashboard_image_version: "latest"
+netbird_server_container_name: "netbird-server"
+netbird_server_image_name: "netbirdio/netbird-server"
+netbird_server_image_version: "latest"
+
+# specs
+netbird_dashboard_memory: "1g"
+netbird_server_memory: "1g"

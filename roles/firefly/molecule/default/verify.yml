@@ -9,17 +9,17 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ firefly_container_name }}"
-      register: result
+      register: firefly_result
 
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ firefly_mysql_container_name }}"
-      register: result_mysql
+      register: firefly_result_mysql
 
     - name: Check Firefly is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
-          - result_mysql.container['State']['Status'] == "running"
-          - result_mysql.container['State']['Restarting'] == false
+          - firefly_result.container['State']['Status'] == "running"
+          - firefly_result.container['State']['Restarting'] == false
+          - firefly_result_mysql.container['State']['Status'] == "running"
+          - firefly_result_mysql.container['State']['Restarting'] == false

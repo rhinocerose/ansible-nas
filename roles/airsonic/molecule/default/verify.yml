@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ airsonic_container_name }}"
-      register: result
+      register: airsonic_result
 
     - name: Check Airsonic is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - airsonic_result.container['State']['Status'] == "running"
+          - airsonic_result.container['State']['Restarting'] == false

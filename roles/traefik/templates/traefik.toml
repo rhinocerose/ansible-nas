@@ -47,3 +47,6 @@
 
 [metrics]
   [metrics.prometheus]
+    addEntryPointsLabels = true
+    addRoutersLabels = true
+    addServicesLabels = true

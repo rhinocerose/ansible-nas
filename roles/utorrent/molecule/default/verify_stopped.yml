@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ utorrent_container_name }}"
         state: absent
-      register: result
+      register: utorrent_result
 
     - name: Check if utorrent is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not utorrent_result.changed

@@ -9,10 +9,10 @@
     - name: Get navidrome container state
       community.docker.docker_container:
         name: "{{ navidrome_container_name }}"
-      register: result
+      register: navidrome_result
 
     - name: Check if navidrome containers are running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - navidrome_result.container['State']['Status'] == "running"
+          - navidrome_result.container['State']['Restarting'] == false

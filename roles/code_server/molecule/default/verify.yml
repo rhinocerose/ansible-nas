@@ -9,10 +9,10 @@
     - name: Get container state
       community.docker.docker_container_info:
         name: "{{ code_server_container_name }}"
-      register: result
+      register: code_server_result
 
     - name: Check Code Server is running
       ansible.builtin.assert:
         that:
-          - result.container['State']['Status'] == "running"
-          - result.container['State']['Restarting'] == false
+          - code_server_result.container['State']['Status'] == "running"
+          - code_server_result.container['State']['Restarting'] == false

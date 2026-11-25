@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ dashy_container_name }}"
         state: absent
-      register: result
+      register: dashy_result
 
     - name: Check Dashy is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not dashy_result.changed

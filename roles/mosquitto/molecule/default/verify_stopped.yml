@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ mosquitto_container_name }}"
         state: absent
-      register: result
+      register: mosquitto_result
 
     - name: Check if mosquitto is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not mosquitto_result.changed

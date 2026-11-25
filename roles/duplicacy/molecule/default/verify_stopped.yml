@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ duplicacy_container_name }}"
         state: absent
-      register: result
+      register: duplicacy_result
 
     - name: Check Duplicacy is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not duplicacy_result.changed

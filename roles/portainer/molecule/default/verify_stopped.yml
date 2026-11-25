@@ -10,9 +10,9 @@
       community.docker.docker_container:
         name: "{{ portainer_container_name }}"
         state: absent
-      register: result
+      register: portainer_result
 
     - name: Check if portainer is stopped
       ansible.builtin.assert:
         that:
-          - not result.changed
+          - not portainer_result.changed
